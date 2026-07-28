@@ -168,8 +168,8 @@ export default function Home() {
           Join the first wave of students helping launch India's first student income challenge across India.
         </p>
 
-        {/* Primary CTA button */}
-        <div className="mb-16">
+        {/* Primary CTA buttons */}
+        <div className="flex flex-wrap items-center justify-center gap-4 mb-16">
           <Link href="#apply">
             <Button
               variant="primary"
@@ -177,6 +177,15 @@ export default function Home() {
               className="bg-primary hover:bg-primary-foreground text-black font-extrabold px-10 py-4 rounded-full text-base tracking-wide flex items-center gap-2 shadow-[0_8px_30px_rgba(163,230,53,0.35)]"
             >
               Apply Now ➔
+            </Button>
+          </Link>
+          <Link href="/dashboard">
+            <Button
+              variant="glass"
+              size="lg"
+              className="px-10 py-4 rounded-full text-base font-extrabold hover:bg-white/10"
+            >
+              Go to Dashboard
             </Button>
           </Link>
         </div>
