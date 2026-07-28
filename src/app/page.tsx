@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { RupeeCoin } from "@/components/ui/RupeeCoin";
 
@@ -13,20 +14,20 @@ export default function Home() {
     <div className="min-h-screen bg-[#050505] text-[#FFFFFF] flex flex-col font-sans relative overflow-hidden dot-grid selection:bg-primary selection:text-black">
       
       {/* BACKGROUND FLOATING COINS (6-8 coins distributed across the canvas to add 3D depth) */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Top Left Coin - Large, slight blur */}
-        <RupeeCoin size={120} rotation={25} blurLevel="sm" delay={0.2} speed={7} className="absolute top-[18%] left-[8%]" />
+      <div className="absolute inset-0 pointer-events-none z-0">
+        {/* Top Left Coin - Large, heavy blur */}
+        <RupeeCoin size={110} rotation={25} blurLevel="md" delay={0.2} speed={7.5} className="absolute top-[8%] left-[5%]" />
         
         {/* Mid Left Coin - Small, sharp */}
-        <RupeeCoin size={65} rotation={-15} blurLevel="none" delay={1.5} speed={5.5} className="absolute top-[40%] left-[18%]" />
+        <RupeeCoin size={60} rotation={-15} blurLevel="none" delay={1.4} speed={6.5} className="absolute top-[34%] left-[18%]" />
         
-        {/* Bottom Left Coin - Medium, blur, low down */}
-        <RupeeCoin size={90} rotation={10} blurLevel="md" delay={0.8} speed={6.5} className="absolute bottom-[25%] left-[5%]" />
+        {/* Bottom Left Coin - Medium, sharp */}
+        <RupeeCoin size={80} rotation={40} blurLevel="none" delay={2.1} speed={8} className="absolute bottom-[38%] left-[8%]" />
         
-        {/* Extreme Bottom Left - Small, sharp */}
-        <RupeeCoin size={60} rotation={35} blurLevel="none" delay={2.3} speed={5} className="absolute bottom-[8%] left-[12%]" />
+        {/* Extreme Bottom Left - Small, heavy blur */}
+        <RupeeCoin size={75} rotation={-10} blurLevel="lg" delay={0.8} speed={7} className="absolute bottom-[10%] left-[13%]" />
         
-        {/* Top Right Coin - Large, tilted, sharp */}
+        {/* Top Right Coin - Large, sharp */}
         <RupeeCoin size={135} rotation={-45} blurLevel="none" delay={0.5} speed={8} className="absolute top-[12%] right-[7%]" />
         
         {/* Mid Right Coin - Small, sharp */}
@@ -40,9 +41,9 @@ export default function Home() {
       </div>
 
       {/* [A] INFINITE TICKER MARQUEE (Top Border) */}
-      <div className="w-full bg-gradient-to-r from-[#F97316] to-[#EA580C] py-2.5 overflow-hidden border-b border-orange-500/20 relative z-20 select-none shadow-[0_4px_20px_rgba(249,115,22,0.15)]">
+      <div className="w-full bg-gradient-to-r from-[#F97316] to-[#EA580C] py-2.5 overflow-hidden border-b border-orange-500/20 relative z-25 select-none shadow-[0_4px_20px_rgba(249,115,22,0.15)]">
         <div className="marquee-container text-black font-extrabold text-[11px] sm:text-xs tracking-wider uppercase">
-          <div className="marquee-content flex gap-8">
+          <div className="marquee-content flex gap-8" style={{ animationDuration: "18s" }}>
             <span>{repeatedTicker}</span>
             <span>{repeatedTicker}</span>
           </div>
@@ -52,14 +53,15 @@ export default function Home() {
       {/* [B] NAVIGATION BAR */}
       <header className="w-full max-w-7xl mx-auto px-6 sm:px-8 py-6 flex justify-between items-center relative z-20 bg-transparent">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg px-2 py-1">
-          <span className="text-2xl font-black tracking-tight text-white select-none">
-            EY
-            <span className="text-primary italic inline-block transform -skew-x-6 relative">
-              FI
-              <span className="absolute -top-1 -right-2 text-[10px] text-[#A3E635] animate-pulse">⚡</span>
-            </span>
-          </span>
+        <Link href="/" className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg">
+          <Image
+            src="/assets/logo.png"
+            alt="EYFI Logo"
+            width={100}
+            height={32}
+            priority
+            className="object-contain"
+          />
         </Link>
 
         {/* Center Links */}
@@ -96,53 +98,14 @@ export default function Home() {
           {/* Neon cap backglow */}
           <div className="absolute inset-0 bg-[#A3E635]/15 rounded-full blur-xl scale-75 group-hover:scale-100 transition-all duration-500" />
           
-          <svg
-            width="88"
-            height="88"
-            viewBox="0 0 100 100"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="relative z-10 drop-shadow-[0_4px_10px_rgba(163,230,53,0.25)]"
-          >
-            {/* Outer dotted orbit */}
-            <circle cx="50" cy="46" r="38" stroke="#A3E635" strokeWidth="1" strokeDasharray="4 4" strokeOpacity="0.4" />
-            
-            {/* Inner solid orbit */}
-            <circle cx="50" cy="46" r="32" stroke="#A3E635" strokeWidth="1" strokeOpacity="0.15" />
-            
-            {/* Baseball Cap SVG Paths */}
-            {/* Main Cap Dome */}
-            <path
-              d="M26 52 C26 28, 74 28, 74 52"
-              stroke="#A3E635"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              fill="none"
-            />
-            {/* Cap Visor/Brim */}
-            <path
-              d="M74 52 C76 52, 92 48, 86 62 C82 70, 68 56, 52 56 C36 56, 26 56, 26 52"
-              stroke="#A3E635"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              fill="none"
-            />
-            {/* Seams detailing */}
-            <path d="M50 28 V40" stroke="#A3E635" strokeWidth="1.5" strokeOpacity="0.7" />
-            <path d="M50 28 C40 32, 34 40, 32 50" stroke="#A3E635" strokeWidth="1.5" strokeOpacity="0.5" />
-            <path d="M50 28 C60 32, 66 40, 68 50" stroke="#A3E635" strokeWidth="1.5" strokeOpacity="0.5" />
-            
-            {/* Cap Button on top */}
-            <circle cx="50" cy="27" r="3" fill="#FACC15" stroke="#A3E635" strokeWidth="1" />
-            
-            {/* Golden Star Badge inside Circle */}
-            <circle cx="50" cy="46" r="10" fill="#050505" stroke="#FACC15" strokeWidth="2" />
-            <polygon
-              points="50,39 53,44 59,44 54,48 56,54 50,51 44,54 46,48 41,44 47,44"
-              fill="#FACC15"
-            />
-          </svg>
+          <Image
+            src="/assets/cap.png"
+            alt="EYFI Cap Badge"
+            width={120}
+            height={120}
+            priority
+            className="relative z-10 drop-shadow-[0_4px_10px_rgba(163,230,53,0.25)] animate-float"
+          />
         </div>
 
         {/* Headlines */}
@@ -151,7 +114,7 @@ export default function Home() {
             Someone is going to
           </span>
           <h2 className="text-5xl sm:text-7xl font-black tracking-tighter leading-none">
-            build <span className="text-primary glow-lime/10">EYFI</span>
+            build <span className="text-primary italic inline-block transform -skew-x-12 tracking-tight">EYFI</span>
           </h2>
           <h2 className="text-4xl sm:text-6xl font-black tracking-tight leading-tight">
             on your <span className="text-primary">campus.</span>
