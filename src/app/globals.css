@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,600&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -24,21 +25,21 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* EYFI Brand Dark Theme (Default premium gamified visual style) */
-    --background: #09090b;
+    /* EYFI Pure Dark Mode System */
+    --background: #050505;
     --foreground: #fafafa;
     
-    --primary: #6366f1;
-    --primary-foreground: #ffffff;
-    --secondary: #f43f5e;
+    --primary: #A3E635; /* Lime/Neon Green */
+    --primary-foreground: #000000;
+    --secondary: #F97316; /* Orange Gradient */
     --secondary-foreground: #ffffff;
-    --accent: #fbbf24;
-    --accent-foreground: #09090b;
+    --accent: #FACC15; /* Muted Gold/Amber */
+    --accent-foreground: #050505;
     
-    --card: #18181b;
+    --card: #141414; /* Charcoal Dark */
     --card-foreground: #fafafa;
     
-    --border: #27272a;
+    --border: #1f1f1f;
   }
 }
 
@@ -56,54 +57,81 @@
   --color-border: var(--border);
   
   /* Brand specific colors */
-  --color-eyfi-purple: #6366f1;
-  --color-eyfi-gold: #f59e0b;
-  --color-eyfi-indigo: #4338ca;
-  --color-eyfi-dark: #0f0f16;
+  --color-eyfi-lime: #A3E635;
+  --color-eyfi-neon: #C0FF3E;
+  --color-eyfi-gold: #FACC15;
+  --color-eyfi-charcoal: #141414;
+  --color-eyfi-orange: #F97316;
   
   /* Custom Animations */
   --animate-float: float 6s ease-in-out infinite;
   --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
 }
 
 /* Custom animations declarations */
 @keyframes float {
   0%, 100% {
-    transform: translateY(0);
+    transform: translateY(0) rotate(0deg);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-12px) rotate(3deg);
   }
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans);
   overflow-x: hidden;
+}
+
+/* Repeating Faint Dark-Gray Micro-Dot Grid Pattern */
+.dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Infinite Marquee Loop Scrolling */
+.marquee-container {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.marquee-content {
+  display: inline-flex;
+  animation: marquee-scroll 35s linear infinite;
+  min-width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 /* Glassmorphism utilities */
 .glass-panel {
-  background: rgba(24, 24, 27, 0.65);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.glass-panel-light {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+/* Glow highlights */
+.glow-lime {
+  box-shadow: 0 0 25px rgba(163, 230, 53, 0.15);
 }
 
-/* Reward Ladder Specific Utility Styles (cyberpunk glow effect) */
-.glow-primary {
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+.glow-orange {
+  box-shadow: 0 0 25px rgba(249, 115, 22, 0.2);
 }
-
-.glow-accent {
-  box-shadow: 0 0 20px rgba(245, 158, 11, 0.25);
-}
-
