@@ -109,19 +109,25 @@ export default function Home() {
         </div>
 
         {/* Headlines */}
-        <div className="space-y-2 select-none">
-          <span className="block text-2xl sm:text-3xl font-bold tracking-tight text-white opacity-95">
+        <div className="space-y-3 select-none font-sharp-display">
+          <span className="block text-2xl sm:text-3xl font-extrabold tracking-[-0.04em] text-white opacity-95">
             Someone is going to
           </span>
-          <h2 className="text-5xl sm:text-7xl font-black tracking-tighter leading-none">
-            build <span className="text-primary italic inline-block transform -skew-x-12 tracking-tight">EYFI</span>
+          <h2 className="text-6xl sm:text-8xl font-black tracking-[-0.04em] leading-[0.95]">
+            build{" "}
+            <span
+              className="text-primary inline-block px-3"
+              style={{ transform: "rotate(-3.5deg)" }}
+            >
+              EYFI
+            </span>
           </h2>
-          <h2 className="text-4xl sm:text-6xl font-black tracking-tight leading-tight">
+          <h2 className="text-5xl sm:text-7xl font-black tracking-[-0.04em] leading-[0.95] mt-1">
             on your <span className="text-primary">campus.</span>
           </h2>
           
           {/* Playfair Serif Italic Subheadline */}
-          <p className="font-serif italic text-2xl sm:text-3xl text-accent font-medium pt-2 pb-6">
+          <p className="font-serif italic text-2xl sm:text-3xl text-accent font-medium pt-3 pb-6">
             Why shouldn&apos;t it be you?
           </p>
         </div>
