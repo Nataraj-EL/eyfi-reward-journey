@@ -29,12 +29,17 @@ export const RewardUnlock: React.FC<RewardUnlockProps> = ({
   // Animation phases: "closed" | "opening" | "revealed"
   const [phase, setPhase] = React.useState<"closed" | "opening" | "revealed">("closed");
 
-  // Reset phase when modal opens
+  // Reset phase when modal opens & handle Escape key close for accessibility
   React.useEffect(() => {
     if (isOpen) {
-      setPhase("closed");
+      setTimeout(() => setPhase("closed"), 0);
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") onClose();
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => window.removeEventListener("keydown", handleKeyDown);
     }
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   const handleOpenChest = () => {
     if (phase !== "closed") return;
@@ -155,7 +160,7 @@ export const RewardUnlock: React.FC<RewardUnlockProps> = ({
               <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
                 {Array.from({ length: 12 }).map((_, idx) => {
                   const angle = (idx / 12) * 2 * Math.PI;
-                  const distance = 160 + Math.random() * 80;
+                  const distance = 160 + ((idx * 79) % 80);
                   const destX = Math.cos(angle) * distance;
                   const destY = Math.sin(angle) * distance;
                   

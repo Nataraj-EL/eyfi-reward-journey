@@ -1,65 +1,79 @@
 # EYFI Reward Journey
 
-A premium, gamified ambassador reward experience designed for the **EYFI** ecosystem. The application rewards ambassadors for their contribution and guides them along an interactive journey ladder with customized mascot characters and progressive tiers.
+A premium, interactive, and gamified campus ambassador rewards dashboard built for the **EYFI** ecosystem. The application tracks active scout registration milestones and rewards student leaders through unlockable tiers, paid summer internship reviews, merchandise, and founding member tokens.
 
 ---
 
 ## 🚀 Tech Stack
 
-- **Core**: [Next.js (v16.x)](https://nextjs.org/) (App Router, React 19)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Core**: [Next.js (v16.2.12)](https://nextjs.org/) (App Router, React 19)
+- **State Management**: Data-driven state hooks with SSR-safe `localStorage` cache synchronization
 - **Styling**: [Tailwind CSS (v4.0)](https://tailwindcss.com/)
-- **Visual Assets**: 13 custom Gemini-generated mascots
-- **Layout & Animations**: Glassmorphism, smooth CSS transitions, customizable animation placeholders.
+- **Animations**: [Framer Motion](https://www.framer.com/motion/) & custom CSS keyframes (with media queries for `prefers-reduced-motion` compliance)
+- **Icons**: [Lucide React](https://lucide.dev/)
 
 ---
 
-## 📁 Folder Structure
+## 📁 Code Architecture & Components Map
 
-The project conforms to a scalable production-ready layout:
+The codebase is organized into modular directories matching modern React production standards:
 
 ```text
 ├── public/
 │   └── assets/
-│       └── mascots/          # Mascot image files (mascot-1.png to mascot-13.png)
+│       └── mascots/          # 13 high-quality mascot illustrations (mascot-1.png to mascot-13.png)
 ├── src/
-│   ├── app/                  # Next.js App Router (Layouts, pages, globals.css)
-│   ├── components/           # UI and Business components
-│   │   ├── ui/               # Reusable atomic elements (buttons, inputs, glass cards)
-│   │   ├── reward-journey/   # Gamified progress lines, step animations, tier rewards
-│   │   └── dashboard/        # Ambassador progress stats, active tasks, user stats
-│   ├── data/                 # Static content, tiers metadata, and mock state
-│   ├── assets/               # Local svg icons and design vectors
-│   ├── animations/           # CSS animation frames or Framer Motion structures
-│   └── utils/                # Helper files and custom hooks (e.g. cn class merger)
+│   ├── app/                  # Next.js App Router Pages
+│   │   ├── layout.tsx        # Production-grade head metadata and OpenGraph tag setups
+│   │   ├── globals.css       # Custom neon glows, repeating dot-grids, and scroll marquee keyframes
+│   │   ├── page.tsx          # High-fidelity center-aligned campaign landing page
+│   │   └── dashboard/
+│   │       └── page.tsx      # Main ambassador simulation workspace page
+│   ├── components/           # Modular component layout directories
+│   │   ├── ui/               # Reusable design system elements
+│   │   │   ├── Button.tsx    # Accessible multi-variant click helper with loading anims
+│   │   │   ├── Badge.tsx     # Color status tags with neon shadowing glow effects
+│   │   │   ├── GlassCard.tsx # Glassmorphism border panel with blur backdrops
+│   │   │   ├── Progress.tsx  # Dynamic progress bar tracking percentage loads
+│   │   │   ├── MascotDisplay.tsx # Optimized float container for mascot artwork rendering
+│   │   │   └── RupeeCoin.tsx # 3D-rendered SVG coin representing Indian Rupee (₹)
+│   │   └── reward-journey/   # Gamified milestone widgets
+│   │       ├── RewardChest.tsx   # Gift box presenter (locked, active, claimed)
+│   │       ├── MilestoneNode.tsx # Progression node along the horizontal axis
+│   │       ├── RewardPath.tsx    # Connecting progression overlay tracker SVG
+│   │       ├── RewardPreview.tsx # Responsive card showing perks list (desktop: sidebar, mobile: cards)
+│   │       ├── RewardCardStack.tsx # 3D trading card displaying perks with flip animations
+│   │       └── RewardUnlock.tsx   # Celebration overlay chest opening & sparks burst modal
+│   ├── data/                 # Consolidated datasets
+│   │   ├── ambassador.ts     # Multi-profile stats database config (Aarav, Priya, Rohan)
+│   │   └── rewards.ts        # The 6 levels of rewards criteria (Scout, Ambassador, Founder, etc.)
+│   ├── utils/                # Calculation helper modules
+│   │   ├── cn.ts             # Tailwind class merging tool
+│   │   ├── progression.ts    # Isolated logic determining locks, active levels, and milestones
+│   │   └── persistence.ts    # LocalCache read/write hooks syncing scout edits and claim history
 ```
 
 ---
 
-## 🗺️ Sprint Roadmap
+## 🕹️ Interactive Features
 
-### 🏁 Sprint 0: Project Foundation (Current)
-- [x] Reorganize asset folders with clean, production-ready names.
-- [x] Scaffold Next.js + TypeScript + Tailwind CSS structure.
-- [x] Configure global CSS with responsive theme variables & glassy utilities.
-- [x] Establish component categorization structure (`ui`, `reward-journey`, `dashboard`).
-- [x] Deploy initial codebase structure to GitHub.
+1. **High-Fidelity Landing Page**: Centered layout mirroring corporate visual aesthetics, complete with infinite scrolling orange gradients, custom badge SVGs, and absolute-positioned 3D rotating Rupee coins.
+2. **Dynamic Ambassador Simulator**: A header workspace that allows toggling between three default student profiles and adjusting active scout metrics (scout numbers mutate instantly and recalculate ladder states).
+3. **Horizontal Journey Path**: Custom horizontal milestones that scroll sideways on mobile viewports. Connects paths dynamically from registration statistics.
+4. **Interactive Chest Unlocks**: Completed milestone chests can be opened to launch spark confetti overlays and reveal 3D trading cards. The trading card flips when clicked to display benefits on the back.
+5. **Persistent Claim Transactions**: Achievements are logged dynamically with active **Claim Reward** options that cache status to `localStorage` securely.
 
-### 🎮 Sprint 1: Interactive Rewards Ladder
-- [ ] Implement data models for the rewards tiers and point criteria.
-- [ ] Build the desktop and mobile layouts for the dashboard.
-- [ ] Design the reward ladder roadmap using mascot assets.
-- [ ] Add initial hover/interaction sound mappings.
+---
 
-### ⚡ Sprint 2: Web3 Wallet & Operations
-- [ ] Integrate Wallet Connect / Web3 authentication.
-- [ ] Implement reward claim actions (mint tokens / assign ambassador roles).
-- [ ] Connect animations to the ladder progression path (Framer Motion).
+## 🗺️ Sprint Timeline Summary
 
-### 💅 Sprint 3: Final Polish & Deployment
-- [ ] Perform cross-browser UI/UX testing and performance optimizations.
-- [ ] Configure CI/CD deployment pipelines.
-- [ ] Final handoff and mainnet deployment.
+- **Sprint 0 (Foundation)**: Initialized Next.js, structured the 13 mascot PNG assets, and configured Tailwind CSS v4 variables.
+- **Sprint 1 (Design Tokens)**: Formed class helpers, glass cards, buttons, badges, and responsive metadata structures.
+- **Sprint 2 (Dashboard)**: Created welcome headers, campaign metrics blocks, and profiles.
+- **Sprint 3 (Milestone Ladder)**: Built horizontal lines, milestone nodes, and active preview sidebars.
+- **Sprint 4 (Celebration)**: Completed chest shakes, 3D flip card stacks, spark bursts, and overlay controllers.
+- **Sprint 5 (Dynamic State)**: Programmed profile switchers, localStorage synchronizations, and claim transactions.
+- **Sprint 6 (Polish)**: Enforced E2E QA checks, accessibility key events, prefers-reduced-motion media settings, and documentation updates.
 
 ---
 
@@ -81,4 +95,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 4. Build Production Bundle
+```bash
+npm run build
+```

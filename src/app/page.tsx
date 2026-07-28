@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { RupeeCoin } from "@/components/ui/RupeeCoin";
-import { Sparkles, HelpCircle, Trophy } from "lucide-react";
+
 
 export default function Home() {
   const tickerText = "WAVE 01 SCOUTS ✦ APPLICATIONS OPEN ✦ BUILD EYFI ON YOUR CAMPUS ✦ LIMITED SPOTS PER COLLEGE ✦ PAID INTERNSHIPS ✦ ";
@@ -159,13 +159,13 @@ export default function Home() {
           
           {/* Playfair Serif Italic Subheadline */}
           <p className="font-serif italic text-2xl sm:text-3xl text-accent font-medium pt-2 pb-6">
-            Why shouldn't it be you?
+            Why shouldn&apos;t it be you?
           </p>
         </div>
 
         {/* [D] Middle Subtext description */}
         <p className="text-[#9CA3AF] text-sm sm:text-base max-w-xl leading-relaxed mb-8">
-          Join the first wave of students helping launch India's first student income challenge across India.
+          Join the first wave of students helping launch India&apos;s first student income challenge across India.
         </p>
 
         {/* Primary CTA buttons */}

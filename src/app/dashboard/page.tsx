@@ -10,10 +10,9 @@ import { RewardJourney } from "@/components/reward-journey/RewardJourney";
 import { MOCK_PROFILES, AmbassadorProfile } from "@/data/ambassador";
 import { REWARD_MILESTONES, MASCOT_PATHS } from "@/data/rewards";
 import { loadPersistentProfiles, savePersistentProfiles, loadClaimedRewards, saveClaimedRewards } from "@/utils/persistence";
-import { ArrowLeft, LayoutDashboard, Compass, Sparkles, Plus, Minus, Users, RefreshCw, CheckCircle } from "lucide-react";
+import { ArrowLeft, LayoutDashboard, Compass, Sparkles, Plus, Minus, RefreshCw, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { GlassCard } from "@/components/ui/GlassCard";
-import { Badge } from "@/components/ui/Badge";
 import Image from "next/image";
 
 export default function Dashboard() {
@@ -26,8 +25,10 @@ export default function Dashboard() {
   // Load persistent configurations on mount
   React.useEffect(() => {
     const loadedProfiles = loadPersistentProfiles(MOCK_PROFILES);
-    setProfiles(loadedProfiles);
-    setIsHydrated(true);
+    setTimeout(() => {
+      setProfiles(loadedProfiles);
+      setIsHydrated(true);
+    }, 0);
   }, []);
 
   // Retrieve current active profile object
@@ -37,7 +38,10 @@ export default function Dashboard() {
   // Load claims history whenever profile changes
   React.useEffect(() => {
     if (isHydrated) {
-      setClaimedIds(loadClaimedRewards(currentProfile.id));
+      const claims = loadClaimedRewards(currentProfile.id);
+      setTimeout(() => {
+        setClaimedIds(claims);
+      }, 0);
     }
   }, [activeProfileId, isHydrated, currentProfile.id]);
 
