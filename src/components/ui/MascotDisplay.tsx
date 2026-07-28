@@ -65,7 +65,7 @@ export const MascotDisplay: React.FC<MascotDisplayProps> = ({
         transition={{ type: "spring", stiffness: 300, damping: 15 }}
       >
         <Image
-          src={src}
+          src={`${src}?v=2`}
           alt={alt}
           fill
           sizes="(max-width: 768px) 150px, 300px"

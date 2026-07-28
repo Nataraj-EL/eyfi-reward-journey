@@ -293,7 +293,7 @@ export default function Dashboard() {
                     {/* Tiny Mascot visual icon */}
                     <div className="relative w-16 h-16 rounded-xl bg-neutral-900 flex items-center justify-center p-1 border border-neutral-850 flex-shrink-0">
                       <Image
-                        src={milestone.mascotPath}
+                        src={`${milestone.mascotPath}?v=2`}
                         alt={`${milestone.name} Mini Mascot`}
                         fill
                         sizes="60px"
