@@ -9,6 +9,8 @@ import { MOCK_AMBASSADOR_DATA } from "@/data/ambassador";
 import { ArrowLeft, LayoutDashboard, Compass } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
+import { RewardJourney } from "@/components/reward-journey/RewardJourney";
+
 export default function Dashboard() {
   const { profile, metrics, currentTier, nextMilestone } = MOCK_AMBASSADOR_DATA;
 
@@ -69,6 +71,11 @@ export default function Dashboard() {
             verificationRate={metrics.verificationRate}
             waveActive={metrics.waveActive}
           />
+        </section>
+
+        {/* Interactive Milestone Journey */}
+        <section aria-label="Ambassador Reward Milestone Ladder">
+          <RewardJourney currentRegistrations={metrics.scoutsRegisteredCount} />
         </section>
 
         {/* Level Progression Grid */}
