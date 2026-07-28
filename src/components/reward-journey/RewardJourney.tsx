@@ -35,6 +35,24 @@ export const RewardJourney: React.FC<RewardJourneyProps> = ({
   const [isUnlockOpen, setIsUnlockOpen] = React.useState(false);
   const [unlockMilestone, setUnlockMilestone] = React.useState<RewardMilestone | null>(null);
 
+  // Lifecycle check to automatically trigger celebrate window for newly unlocked milestones
+  React.useEffect(() => {
+    // Check if there are completed milestones (unlocked status)
+    const completedMilestones = REWARD_MILESTONES.filter(
+      (m) => getMilestoneStatus(m.id, currentRegistrations, REWARD_MILESTONES) === "unlocked"
+    );
+    
+    // Auto-trigger celebration overlay for the highest unlocked level to simulate newly unlocked state on load
+    if (completedMilestones.length > 0) {
+      const highestUnlocked = completedMilestones[completedMilestones.length - 1];
+      const timer = setTimeout(() => {
+        setUnlockMilestone(highestUnlocked);
+        setIsUnlockOpen(true);
+      }, 800);
+      return () => clearTimeout(timer);
+    }
+  }, [currentRegistrations]);
+
   // Compute total horizontal progression percentages
   const progressPercentage = calculateJourneyProgress(currentRegistrations, REWARD_MILESTONES);
 
