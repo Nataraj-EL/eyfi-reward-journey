@@ -75,7 +75,7 @@ export default function Dashboard() {
 
         {/* Interactive Milestone Journey */}
         <section aria-label="Ambassador Reward Milestone Ladder">
-          <RewardJourney currentRegistrations={metrics.scoutsRegisteredCount} />
+          <RewardJourney ambassadorData={MOCK_AMBASSADOR_DATA} />
         </section>
 
         {/* Level Progression Grid */}

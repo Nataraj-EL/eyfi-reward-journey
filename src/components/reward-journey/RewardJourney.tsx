@@ -5,20 +5,23 @@ import { REWARD_MILESTONES, RewardMilestone } from "@/data/rewards";
 import { MilestoneNode } from "./MilestoneNode";
 import { RewardPath } from "./RewardPath";
 import { RewardPreview } from "./RewardPreview";
-import { calculateJourneyProgress, getMilestoneStatus, getNextMilestone, MilestoneStatus } from "@/utils/progression";
-import { Trophy, HelpCircle, ChevronRight, Award } from "lucide-react";
+import { calculateJourneyProgress, getMilestoneStatus, getNextMilestone } from "@/utils/progression";
+import { Trophy, Award, Users } from "lucide-react";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { Badge } from "@/components/ui/Badge";
+import { AmbassadorDashboardData } from "@/data/ambassador";
 
 export interface RewardJourneyProps extends React.HTMLAttributes<HTMLDivElement> {
-  currentRegistrations: number;
+  ambassadorData: AmbassadorDashboardData;
 }
 
 export const RewardJourney: React.FC<RewardJourneyProps> = ({
   className,
-  currentRegistrations,
+  ambassadorData,
   ...props
 }) => {
+  const currentRegistrations = ambassadorData.metrics.scoutsRegisteredCount;
+
   // Find initial next milestone
   const nextTargetMilestone = getNextMilestone(currentRegistrations, REWARD_MILESTONES);
   
@@ -29,6 +32,11 @@ export const RewardJourney: React.FC<RewardJourneyProps> = ({
 
   // Compute total horizontal progression percentages
   const progressPercentage = calculateJourneyProgress(currentRegistrations, REWARD_MILESTONES);
+
+  // Compute registrations remaining for next reward
+  const registrationsRemaining = nextTargetMilestone 
+    ? Math.max(nextTargetMilestone.registrationsRequired - currentRegistrations, 0)
+    : 0;
 
   return (
     <div className={`flex flex-col lg:flex-row gap-8 items-start w-full ${className}`} {...props}>
@@ -61,17 +69,11 @@ export const RewardJourney: React.FC<RewardJourneyProps> = ({
             <RewardPath progressPercentage={progressPercentage} />
 
             {/* Render each milestone node dynamically */}
-            {REWARD_MILESTONES.map((milestone, idx) => {
-              // Retrieve registrations required for next milestone to compute status accurately
-              const nextRegistrations = 
-                idx < REWARD_MILESTONES.length - 1 
-                  ? REWARD_MILESTONES[idx + 1].registrationsRequired 
-                  : null;
-
+            {REWARD_MILESTONES.map((milestone) => {
               const status = getMilestoneStatus(
-                milestone.registrationsRequired,
+                milestone.id,
                 currentRegistrations,
-                nextRegistrations
+                REWARD_MILESTONES
               );
 
               return (
@@ -91,14 +93,21 @@ export const RewardJourney: React.FC<RewardJourneyProps> = ({
         </div>
 
         {/* Dynamic Road guide subtext details */}
-        <div className="p-4 bg-neutral-900/40 rounded-xl border border-neutral-850 flex items-center justify-between text-xs text-neutral-400 select-none">
+        <div className="p-4 bg-neutral-900/40 rounded-xl border border-neutral-850 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-neutral-400 select-none">
           <span className="flex items-center gap-2">
             <Award size={14} className="text-primary" />
             <span>Click any chest node to view levels and details.</span>
           </span>
-          {nextTargetMilestone && (
-            <span className="hidden sm:inline-flex items-center gap-1">
-              Next Goal: <strong className="text-primary">{nextTargetMilestone.name}</strong> ({nextTargetMilestone.registrationsRequired} Scouts)
+          {nextTargetMilestone ? (
+            <span className="flex items-center gap-1.5 text-xs text-slate-300">
+              <Users size={12} className="text-accent" />
+              <span>
+                Need <strong className="text-accent font-mono">{registrationsRemaining}</strong> more signups to unlock <strong className="text-primary">{nextTargetMilestone.name}</strong>.
+              </span>
+            </span>
+          ) : (
+            <span className="text-emerald-400 font-semibold">
+              🎉 Maximum level achieved! All milestones unlocked.
             </span>
           )}
         </div>
@@ -115,12 +124,9 @@ export const RewardJourney: React.FC<RewardJourneyProps> = ({
           description={selectedMilestone.description}
           perks={selectedMilestone.perks}
           status={getMilestoneStatus(
-            selectedMilestone.registrationsRequired,
+            selectedMilestone.id,
             currentRegistrations,
-            // get next registration threshold for selection status
-            selectedMilestone.id < REWARD_MILESTONES.length 
-              ? REWARD_MILESTONES[selectedMilestone.id].registrationsRequired 
-              : null
+            REWARD_MILESTONES
           )}
           currentRegistrations={currentRegistrations}
         />

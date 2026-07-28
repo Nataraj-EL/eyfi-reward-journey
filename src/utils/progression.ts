@@ -3,22 +3,24 @@ import { RewardMilestone } from "@/data/rewards";
 export type MilestoneStatus = "unlocked" | "active" | "locked";
 
 /**
- * Evaluates the visual/logical status of a milestone.
+ * Evaluates the visual/logical status of a milestone purely inside utilities.
  */
 export function getMilestoneStatus(
-  milestoneRegistrations: number,
+  milestoneId: number,
   currentRegistrations: number,
-  nextMilestoneRegistrations: number | null
+  milestones: RewardMilestone[]
 ): MilestoneStatus {
-  if (currentRegistrations >= milestoneRegistrations) {
+  const milestoneIndex = milestones.findIndex((m) => m.id === milestoneId);
+  if (milestoneIndex === -1) return "locked";
+  
+  const milestone = milestones[milestoneIndex];
+  if (currentRegistrations >= milestone.registrationsRequired) {
     return "unlocked";
   }
   
-  // Active milestone is the next immediate locked one
-  if (
-    currentRegistrations < milestoneRegistrations && 
-    (nextMilestoneRegistrations === null || currentRegistrations >= nextMilestoneRegistrations)
-  ) {
+  // The first milestone that the user has NOT completed yet is the "active" next unlock milestone
+  const firstLockedMilestone = milestones.find((m) => currentRegistrations < m.registrationsRequired);
+  if (firstLockedMilestone && firstLockedMilestone.id === milestoneId) {
     return "active";
   }
 
