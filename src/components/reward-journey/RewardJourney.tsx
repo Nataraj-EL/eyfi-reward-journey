@@ -5,6 +5,7 @@ import { REWARD_MILESTONES, RewardMilestone } from "@/data/rewards";
 import { MilestoneNode } from "./MilestoneNode";
 import { RewardPath } from "./RewardPath";
 import { RewardPreview } from "./RewardPreview";
+import { RewardUnlock } from "./RewardUnlock";
 import { calculateJourneyProgress, getMilestoneStatus, getNextMilestone } from "@/utils/progression";
 import { Trophy, Award, Users } from "lucide-react";
 import { GlassCard } from "@/components/ui/GlassCard";
@@ -29,6 +30,10 @@ export const RewardJourney: React.FC<RewardJourneyProps> = ({
   const [selectedMilestone, setSelectedMilestone] = React.useState<RewardMilestone>(
     nextTargetMilestone || REWARD_MILESTONES[REWARD_MILESTONES.length - 1]
   );
+
+  // States for handling celebratory milestone unlocking experiences
+  const [isUnlockOpen, setIsUnlockOpen] = React.useState(false);
+  const [unlockMilestone, setUnlockMilestone] = React.useState<RewardMilestone | null>(null);
 
   // Compute total horizontal progression percentages
   const progressPercentage = calculateJourneyProgress(currentRegistrations, REWARD_MILESTONES);
@@ -83,7 +88,13 @@ export const RewardJourney: React.FC<RewardJourneyProps> = ({
                   registrationsRequired={milestone.registrationsRequired}
                   status={status}
                   isSelected={selectedMilestone.id === milestone.id}
-                  onNodeClick={() => setSelectedMilestone(milestone)}
+                  onNodeClick={() => {
+                    setSelectedMilestone(milestone);
+                    if (status === "unlocked") {
+                      setUnlockMilestone(milestone);
+                      setIsUnlockOpen(true);
+                    }
+                  }}
                   className="w-24 flex-shrink-0"
                 />
               );
@@ -131,6 +142,22 @@ export const RewardJourney: React.FC<RewardJourneyProps> = ({
           currentRegistrations={currentRegistrations}
         />
       </div>
+
+      {/* Reward celebrate overlay */}
+      {unlockMilestone && (
+        <RewardUnlock
+          isOpen={isUnlockOpen}
+          onClose={() => {
+            setIsUnlockOpen(false);
+            setUnlockMilestone(null);
+          }}
+          name={unlockMilestone.name}
+          mascotPath={unlockMilestone.mascotPath}
+          perks={unlockMilestone.perks}
+          rewardText={unlockMilestone.rewardText}
+          description={unlockMilestone.description}
+        />
+      )}
 
     </div>
   );
