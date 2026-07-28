@@ -1,72 +1,76 @@
 export interface AmbassadorProfile {
+  id: string;
   name: string;
   university: string;
-  avatarUrl?: string;
   rank: number;
-  totalPoints: number;
-}
-
-export interface RegistrationMetrics {
   scoutsRegisteredCount: number;
   targetScouts: number;
-  verificationRate: number; // e.g. percentage of successful scout actions
+  verificationRate: number;
   waveActive: number;
-}
-
-export interface AmbassadorTierInfo {
-  id: number;
-  name: string;
-  mascotPath: string;
-  description: string;
-  unlockedBenefits: string[];
-}
-
-export interface NextMilestoneInfo {
-  name: string;
-  pointsRequired: number;
-  mascotPath: string;
-  pendingBenefits: string[];
+  avatarPlaceholderText: string;
 }
 
 export interface AmbassadorDashboardData {
-  profile: AmbassadorProfile;
-  metrics: RegistrationMetrics;
-  currentTier: AmbassadorTierInfo;
-  nextMilestone: NextMilestoneInfo;
+  profile: {
+    name: string;
+    university: string;
+    rank: number;
+    totalPoints: number;
+    avatarPlaceholderText: string;
+  };
+  metrics: {
+    scoutsRegisteredCount: number;
+    targetScouts: number;
+    verificationRate: number;
+    waveActive: number;
+  };
+  currentTier: {
+    id: number;
+    name: string;
+    mascotPath: string;
+    description: string;
+    unlockedBenefits: string[];
+  };
+  nextMilestone: {
+    name: string;
+    pointsRequired: number;
+    mascotPath: string;
+    pendingBenefits: string[];
+  };
 }
 
-export const MOCK_AMBASSADOR_DATA: AmbassadorDashboardData = {
-  profile: {
+export const MOCK_PROFILES: AmbassadorProfile[] = [
+  {
+    id: "aarav",
     name: "Aarav Sharma",
     university: "IIT Bombay",
     rank: 14,
-    totalPoints: 1250,
-  },
-  metrics: {
     scoutsRegisteredCount: 18,
     targetScouts: 30,
     verificationRate: 92,
     waveActive: 1,
+    avatarPlaceholderText: "AS",
   },
-  currentTier: {
-    id: 2,
-    name: "Novice Knight",
-    mascotPath: "/assets/mascots/mascot-2.png",
-    description: "You've successfully activated Wave 1 scouts on your campus. Keep sharing challenges!",
-    unlockedBenefits: [
-      "Access to private campus ambassador Discord channel",
-      "Early notifications of local ecosystem drops",
-      "Wave 1 point multiplier bonus (1.2x)"
-    ],
+  {
+    id: "priya",
+    name: "Priya Patel",
+    university: "BITS Pilani",
+    rank: 5,
+    scoutsRegisteredCount: 45,
+    targetScouts: 50,
+    verificationRate: 96,
+    waveActive: 1,
+    avatarPlaceholderText: "PP",
   },
-  nextMilestone: {
-    name: "Ecosystem Guardian",
-    pointsRequired: 2500,
-    mascotPath: "/assets/mascots/mascot-5.png",
-    pendingBenefits: [
-      "Guaranteed allowlists for mainnet token launches",
-      "Direct weekly team chancellery access",
-      "Custom branded physical hoodie box"
-    ],
+  {
+    id: "rohan",
+    name: "Rohan Das",
+    university: "Delhi University",
+    rank: 1,
+    scoutsRegisteredCount: 110,
+    targetScouts: 150,
+    verificationRate: 89,
+    waveActive: 2,
+    avatarPlaceholderText: "RD",
   },
-};
+];
