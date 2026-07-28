@@ -41,7 +41,13 @@ export const RewardCardStack: React.FC<RewardCardStackProps> = ({
       >
         
         {/* CARD FRONT: Mascot Art & Level Title */}
-        <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] glass-panel border-2 border-primary/30 rounded-2xl p-6 flex flex-col justify-between items-center text-center shadow-[0_10px_30px_rgba(163,230,53,0.15)] overflow-hidden">
+        <div
+          className={cn(
+            "absolute inset-0 w-full h-full glass-panel border-2 border-primary/30 rounded-2xl p-6 flex flex-col justify-between items-center text-center shadow-[0_10px_30px_rgba(163,230,53,0.15)] overflow-hidden transition-all duration-300",
+            isFlipped ? "opacity-0 pointer-events-none invisible" : "opacity-100 visible"
+          )}
+          style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+        >
           {/* Accent Glow backdrop */}
           <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-primary/10 to-transparent pointer-events-none" />
 
@@ -78,7 +84,13 @@ export const RewardCardStack: React.FC<RewardCardStackProps> = ({
         </div>
 
         {/* CARD BACK: Unlocked Perks list */}
-        <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] glass-panel border-2 border-emerald-500/30 rounded-2xl p-6 flex flex-col justify-between shadow-[0_10px_30px_rgba(16,185,129,0.15)] overflow-hidden">
+        <div
+          className={cn(
+            "absolute inset-0 w-full h-full glass-panel border-2 border-emerald-500/30 rounded-2xl p-6 flex flex-col justify-between shadow-[0_10px_30px_rgba(16,185,129,0.15)] overflow-hidden transition-all duration-300",
+            isFlipped ? "opacity-100 visible [transform:rotateY(180deg)]" : "opacity-0 pointer-events-none invisible [transform:rotateY(180deg)]"
+          )}
+          style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+        >
           {/* Success gradient backdrop */}
           <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-emerald-500/10 to-transparent pointer-events-none" />
 
@@ -107,7 +119,7 @@ export const RewardCardStack: React.FC<RewardCardStackProps> = ({
               </span>
               <ul className="space-y-1.5" aria-label="Milestone Perks">
                 {perks.map((perk, idx) => (
-                  <li key={idx} className="text-xs text-slate-350 flex items-start gap-2">
+                  <li key={idx} className="text-xs text-slate-355 flex items-start gap-2">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 flex-shrink-0 mt-1.5" aria-hidden="true" />
                     <span>{perk}</span>
                   </li>

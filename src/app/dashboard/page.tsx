@@ -152,11 +152,17 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <Button variant="outline" size="sm" onClick={handleResetSimulator} className="h-8 border-neutral-800 text-xs px-3 hover:bg-neutral-900 select-none">
-            <RefreshCw size={12} className="mr-1.5" /> Reset State
+        <div className="flex items-center gap-3 flex-shrink-0 flex-nowrap">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleResetSimulator}
+            className="h-8 border-neutral-800 text-xs px-3 hover:bg-neutral-900 select-none flex items-center justify-center flex-row flex-nowrap whitespace-nowrap"
+          >
+            <RefreshCw size={12} className="mr-1.5 flex-shrink-0" />
+            <span>Reset State</span>
           </Button>
-          <span className="text-[10px] bg-neutral-900 text-neutral-400 border border-neutral-850 px-3 py-1 rounded-full font-mono font-semibold uppercase tracking-wider select-none hidden sm:block">
+          <span className="text-[10px] bg-neutral-900 text-neutral-400 border border-neutral-850 px-3 py-1 rounded-full font-mono font-semibold uppercase tracking-wider select-none hidden sm:block whitespace-nowrap">
             Wave 01 Live
           </span>
         </div>
@@ -167,13 +173,13 @@ export default function Dashboard() {
         
         {/* SIMULATOR & CONTROL SECTION */}
         <section aria-label="Dynamic Simulator Controls">
-          <GlassCard className="border border-primary/20 bg-primary/5 p-5 flex flex-col sm:flex-row items-center justify-between gap-6" hoverEffect={false}>
+          <GlassCard className="border border-primary/20 bg-primary/5 p-6 flex flex-col items-center justify-center text-center gap-6" hoverEffect={false}>
             {/* Profile Switcher */}
-            <div className="flex flex-col gap-2 w-full sm:w-auto">
+            <div className="flex flex-col items-center gap-2 w-full">
               <span className="text-[10px] text-neutral-400 font-bold uppercase tracking-wider select-none">
                 Select Ambassador Profile
               </span>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap justify-center gap-2">
                 {profiles.map((p) => (
                   <button
                     key={p.id}
@@ -191,11 +197,11 @@ export default function Dashboard() {
             </div>
 
             {/* Registration Changer controls */}
-            <div className="flex flex-col gap-2 w-full sm:w-auto sm:items-end">
+            <div className="flex flex-col items-center gap-2 w-full">
               <span className="text-[10px] text-neutral-400 font-bold uppercase tracking-wider select-none">
                 Simulate Scout Registrations
               </span>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center gap-3">
                 <button
                   onClick={() => updateProfileRegistrations(currentRegistrations - 5)}
                   className="p-2.5 rounded-xl border border-neutral-800 bg-neutral-950 text-neutral-300 hover:text-white hover:bg-neutral-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
