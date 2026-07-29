@@ -25,29 +25,55 @@ export const RewardCardStack: React.FC<RewardCardStackProps> = ({
   ...props
 }) => {
   const [isFlipped, setIsFlipped] = React.useState(false);
+  const [isAnimating, setIsAnimating] = React.useState(false);
+
+  const handleFlip = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setIsFlipped((prev) => !prev);
+  };
 
   return (
     <div
       className={cn(
-        "w-[300px] h-[400px] [perspective:1000px] cursor-pointer select-none",
+        "w-[300px] h-[400px] [perspective:1200px] cursor-pointer select-none",
         className
       )}
-      onClick={() => setIsFlipped((prev) => !prev)}
+      onClick={handleFlip}
       {...props}
     >
       <motion.div
         className="w-full h-full relative [transform-style:preserve-3d]"
-        animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
+        initial={{ rotateY: -35, scale: 0.8, opacity: 0 }}
+        animate={{ 
+          rotateY: isFlipped ? 180 : 0,
+          scale: 1,
+          opacity: 1
+        }}
+        whileHover={{
+          rotateX: 6,
+          rotateY: isFlipped ? 174 : 6,
+          y: -10,
+          boxShadow: "0 25px 50px rgba(163,230,53,0.22)"
+        }}
+        transition={{ 
+          type: "spring", 
+          stiffness: 70, 
+          damping: 14 
+        }}
+        onAnimationStart={() => setIsAnimating(true)}
+        onAnimationComplete={() => setIsAnimating(false)}
       >
         
         {/* CARD FRONT: Mascot Art & Level Title */}
         <div
-          className={cn(
-            "absolute inset-0 w-full h-full bg-[#0d0d0d] border-2 border-primary/30 rounded-2xl p-6 flex flex-col justify-between items-center text-center shadow-[0_10px_30px_rgba(163,230,53,0.15)] overflow-hidden",
-            isFlipped ? "opacity-0 pointer-events-none invisible" : "opacity-100 visible"
-          )}
-          style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: "rotateY(0deg)" }}
+          className="absolute inset-0 w-full h-full glass-panel border-2 border-primary/30 rounded-2xl p-6 flex flex-col justify-between items-center text-center shadow-[0_10px_30px_rgba(163,230,53,0.15)] overflow-hidden"
+          style={{ 
+            backfaceVisibility: "hidden", 
+            WebkitBackfaceVisibility: "hidden", 
+            transform: "rotateY(0deg)",
+            zIndex: isFlipped ? 1 : 2
+          }}
         >
           {/* Accent Glow backdrop */}
           <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-primary/10 to-transparent pointer-events-none" />
@@ -56,7 +82,7 @@ export const RewardCardStack: React.FC<RewardCardStackProps> = ({
             <Badge variant="primary" glow className="text-[10px]">
               <Award size={10} className="mr-1" /> COLLECTIBLE CARD
             </Badge>
-            <span className="text-[10px] text-neutral-550 font-mono">EYFI AMBASSADOR</span>
+            <span className="text-[10px] text-neutral-500 font-mono">EYFI AMBASSADOR</span>
           </div>
 
           {/* Center Mascot display */}
@@ -86,21 +112,23 @@ export const RewardCardStack: React.FC<RewardCardStackProps> = ({
 
         {/* CARD BACK: Unlocked Perks list */}
         <div
-          className={cn(
-            "absolute inset-0 w-full h-full bg-[#0d0d0d] border-2 border-emerald-500/30 rounded-2xl p-6 flex flex-col justify-between shadow-[0_10px_30px_rgba(16,185,129,0.15)] overflow-hidden",
-            isFlipped ? "opacity-100 visible" : "opacity-0 pointer-events-none invisible"
-          )}
-          style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+          className="absolute inset-0 w-full h-full glass-panel border-2 border-primary/30 rounded-2xl p-6 flex flex-col justify-between shadow-[0_10px_30px_rgba(163,230,53,0.15)] overflow-hidden"
+          style={{ 
+            backfaceVisibility: "hidden", 
+            WebkitBackfaceVisibility: "hidden", 
+            transform: "rotateY(180deg)",
+            zIndex: isFlipped ? 2 : 1
+          }}
         >
           {/* Success gradient backdrop */}
-          <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-emerald-500/10 to-transparent pointer-events-none" />
+          <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-primary/10 to-transparent pointer-events-none" />
 
           {/* Header */}
           <div className="flex justify-between items-center z-10">
-            <Badge variant="success" glow className="text-[10px]">
+            <Badge variant="primary" glow className="text-[10px]">
               <Sparkles size={10} className="mr-1" /> LEVEL PERKS
             </Badge>
-            <span className="text-[10px] text-emerald-500 font-mono flex items-center gap-1">
+            <span className="text-[10px] text-primary font-mono flex items-center gap-1">
               <CheckCircle size={10} /> Active
             </span>
           </div>
@@ -109,7 +137,7 @@ export const RewardCardStack: React.FC<RewardCardStackProps> = ({
           <div className="z-10 my-auto space-y-4">
             <div>
               <h5 className="text-base font-extrabold text-foreground">{name} Rewards</h5>
-              <p className="text-[11px] text-neutral-400 leading-normal mt-1">
+              <p className="text-[11px] text-neutral-450 leading-normal mt-1">
                 {description}
               </p>
             </div>
@@ -120,8 +148,8 @@ export const RewardCardStack: React.FC<RewardCardStackProps> = ({
               </span>
               <ul className="space-y-1.5" aria-label="Milestone Perks">
                 {perks.map((perk, idx) => (
-                  <li key={idx} className="text-xs text-slate-355 flex items-start gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 flex-shrink-0 mt-1.5" aria-hidden="true" />
+                  <li key={idx} className="text-xs text-slate-300 flex items-start gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0 mt-1.5" aria-hidden="true" />
                     <span>{perk}</span>
                   </li>
                 ))}
