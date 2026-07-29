@@ -7,8 +7,14 @@ import { RupeeCoin } from "@/components/ui/RupeeCoin";
 
 
 export default function Home() {
-  const tickerText = "WAVE 01 SCOUTS ✦ APPLICATIONS OPEN ✦ BUILD EYFI ON YOUR CAMPUS ✦ LIMITED SPOTS PER COLLEGE ✦ PAID INTERNSHIPS ✦ ";
-  const repeatedTicker = Array(8).fill(tickerText).join("");
+  const tickerItems = [
+    { text: "WAVE 01 SCOUTS", color: "text-white" },
+    { text: "APPLICATIONS OPEN", color: "text-black" },
+    { text: "BUILD EYFI ON YOUR CAMPUS", color: "text-white" },
+    { text: "LIMITED SPOTS PER COLLEGE", color: "text-black" },
+    { text: "PAID INTERNSHIPS", color: "text-white" },
+  ];
+  const repeatedItems = Array(12).fill(tickerItems).flat();
 
   return (
     <div className="min-h-screen bg-[#050505] text-[#FFFFFF] flex flex-col font-sans relative overflow-hidden dot-grid selection:bg-primary selection:text-black">
@@ -43,15 +49,19 @@ export default function Home() {
       {/* [A] INFINITE TICKER MARQUEE (Top Border) */}
       <div className="w-full bg-gradient-to-r from-[#F97316] to-[#EA580C] py-2.5 overflow-hidden border-b border-orange-500/20 relative z-25 select-none shadow-[0_4px_20px_rgba(249,115,22,0.15)]">
         <div className="marquee-container text-black font-extrabold text-[11px] sm:text-xs tracking-wider uppercase">
-          <div className="marquee-content flex gap-8" style={{ animationDuration: "18s" }}>
-            <span>{repeatedTicker}</span>
-            <span>{repeatedTicker}</span>
+          <div className="marquee-content flex gap-6" style={{ animationDuration: "18s" }}>
+            {repeatedItems.map((item, idx) => (
+              <span key={idx} className="flex items-center gap-6">
+                <span className={item.color}>{item.text}</span>
+                <span className="text-black">✦</span>
+              </span>
+            ))}
           </div>
         </div>
       </div>
 
       {/* [B] NAVIGATION BAR */}
-      <header className="w-full max-w-7xl mx-auto px-6 sm:px-8 py-6 flex justify-between items-center relative z-20 bg-transparent">
+      <header className="w-full max-w-7xl mx-auto px-6 sm:px-8 pt-2 pb-4 flex justify-between items-center relative z-20 bg-transparent">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg">
           <Image
@@ -82,7 +92,7 @@ export default function Home() {
           <Link href="#apply">
             <Button
               variant="primary"
-              className="bg-primary hover:bg-primary-foreground text-black font-bold px-6 py-2 rounded-full text-sm shadow-[0_0_20px_rgba(163,230,53,0.2)] focus:ring-offset-black"
+              className="bg-[#A3E635] text-black font-bold px-6 py-2 rounded-full text-sm hover:bg-[#C0FF3E] hover:shadow-[0_0_20px_rgba(163,230,53,0.6)] transition-all duration-300"
             >
               Apply Now
             </Button>
@@ -143,7 +153,7 @@ export default function Home() {
             <Button
               variant="primary"
               size="lg"
-              className="bg-primary hover:bg-primary-foreground text-black font-extrabold px-10 py-4 rounded-full text-base tracking-wide flex items-center gap-2 shadow-[0_8px_30px_rgba(163,230,53,0.35)]"
+              className="bg-[#A3E635] text-black font-extrabold px-10 py-4 rounded-full text-base tracking-wide flex items-center gap-2 hover:bg-[#C0FF3E] hover:shadow-[0_0_30px_rgba(163,230,53,0.65)] hover:scale-105 transition-all duration-300"
             >
               Apply Now ➔
             </Button>
