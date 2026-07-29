@@ -67,7 +67,7 @@ export const MOCK_PROFILES: AmbassadorProfile[] = [
     name: "Rancho",
     university: "Delhi University",
     rank: 1,
-    scoutsRegisteredCount: 110,
+    scoutsRegisteredCount: 202,
     targetScouts: 150,
     verificationRate: 89,
     waveActive: 2,

@@ -25,8 +25,8 @@ export default function Dashboard() {
   // Load persistent configurations on mount
   React.useEffect(() => {
     let loadedProfiles = loadPersistentProfiles(MOCK_PROFILES);
-    // Force-reset persistent profiles cache if they contain old naming keys to clear local cache
-    if (loadedProfiles.some((p) => p.name === "Aarav Sharma")) {
+    // Force-reset persistent profiles cache if they contain old naming keys or outdated mock registration counts
+    if (loadedProfiles.some((p) => p.name === "Aarav Sharma" || (p.id === "rohan" && p.scoutsRegisteredCount !== 202))) {
       loadedProfiles = MOCK_PROFILES;
       savePersistentProfiles(MOCK_PROFILES);
     }
