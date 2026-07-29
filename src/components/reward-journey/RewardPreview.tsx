@@ -142,16 +142,26 @@ export const RewardPreview: React.FC<RewardPreviewProps> = ({
       {/* Main Action Button */}
       <div className="pt-2">
         {isUnlocked ? (
-          <Button variant="glass" className="w-full border-emerald-500/25 text-emerald-400" disabled>
-            <Check size={14} className="mr-1.5" /> Level Unlocked
+          <Button
+            variant="glass"
+            className="w-full border-emerald-500/25 text-emerald-400"
+            leftIcon={<Check size={14} />}
+            disabled
+          >
+            Level Unlocked
           </Button>
         ) : isActive ? (
           <Button variant="primary" className="w-full font-bold shadow-[0_0_20px_rgba(163,230,53,0.2)]">
             Track Progress
           </Button>
         ) : (
-          <Button variant="outline" className="w-full text-neutral-500 border-neutral-900" disabled>
-            <Lock size={14} className="mr-1.5" /> Locked
+          <Button
+            variant="outline"
+            className="w-full text-neutral-500 border-neutral-900"
+            leftIcon={<Lock size={14} />}
+            disabled
+          >
+            Locked
           </Button>
         )}
       </div>
