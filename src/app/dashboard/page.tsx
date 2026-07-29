@@ -237,6 +237,7 @@ export default function Dashboard() {
             rank={currentProfile.rank}
             totalPoints={totalPoints}
             avatarPlaceholderText={currentProfile.avatarPlaceholderText}
+            avatarImageUrl={currentTier.mascotPath}
           />
         </section>
 

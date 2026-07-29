@@ -71,7 +71,7 @@ export const RewardJourney: React.FC<RewardJourneyProps> = ({
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-neutral-900 pb-4">
           <div>
             <h3 className="text-lg font-bold flex items-center gap-2">
-              <Trophy size={18} className="text-primary" /> Gamified Rewards Ladder
+              <Trophy size={18} className="text-primary" /> Rewards Ladder
             </h3>
             <p className="text-xs text-neutral-400 mt-1">
               Select any level below to review requirements and perks

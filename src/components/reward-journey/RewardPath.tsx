@@ -16,7 +16,7 @@ export const RewardPath: React.FC<RewardPathProps> = ({
   return (
     <div
       className={cn(
-        "absolute top-[48px] left-[5%] right-[5%] h-1 bg-neutral-900 rounded-full overflow-hidden border border-neutral-950 z-0",
+        "absolute top-[78px] left-[5%] right-[5%] h-1 bg-neutral-900 rounded-full overflow-hidden border border-neutral-950 z-0",
         className
       )}
       {...props}
