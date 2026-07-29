@@ -9,7 +9,7 @@ import { RewardJourney } from "@/components/reward-journey/RewardJourney";
 import { MOCK_PROFILES, AmbassadorProfile } from "@/data/ambassador";
 import { REWARD_MILESTONES, MASCOT_PATHS } from "@/data/rewards";
 import { loadPersistentProfiles, savePersistentProfiles, loadClaimedRewards, saveClaimedRewards } from "@/utils/persistence";
-import { ArrowLeft, LayoutDashboard, Sparkles, Plus, Minus, RefreshCw, CheckCircle } from "lucide-react";
+import { ArrowLeft, LayoutDashboard, Sparkles, RefreshCw, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { GlassCard } from "@/components/ui/GlassCard";
 import Image from "next/image";
@@ -188,15 +188,14 @@ export default function Dashboard() {
       {/* Main Grid Wrapper */}
       <main className="flex-grow max-w-7xl mx-auto px-6 py-10 w-full relative z-10 flex flex-col gap-8">
         
-        {/* SIMULATOR & CONTROL SECTION */}
-        <section aria-label="Dynamic Simulator Controls">
-          <GlassCard className="border border-neutral-900 bg-neutral-950/60 p-6 flex flex-col sm:flex-row items-center justify-between gap-6" hoverEffect={false}>
-            {/* Profile Switcher */}
-            <div className="flex flex-col items-center sm:items-start gap-2 w-full sm:w-auto">
+        {/* PROFILE SELECTOR SECTION */}
+        <section aria-label="Ambassador Profile Selector">
+          <GlassCard className="border border-neutral-900 bg-neutral-950/60 p-6" hoverEffect={false}>
+            <div className="flex flex-col gap-2">
               <span className="text-[10px] text-neutral-400 font-bold uppercase tracking-wider select-none">
                 Select Ambassador Profile
               </span>
-              <div className="flex flex-wrap justify-center sm:justify-start gap-2">
+              <div className="flex flex-wrap gap-2">
                 {profiles.map((p) => (
                   <button
                     key={p.id}
@@ -210,32 +209,6 @@ export default function Dashboard() {
                     {p.name} ({p.scoutsRegisteredCount} Registrations)
                   </button>
                 ))}
-              </div>
-            </div>
-
-            {/* Registration Changer controls */}
-            <div className="flex flex-col items-center sm:items-end gap-2 w-full sm:w-auto">
-              <span className="text-[10px] text-neutral-400 font-bold uppercase tracking-wider select-none">
-                Simulate Registrations
-              </span>
-              <div className="flex items-center justify-center gap-3">
-                <button
-                  onClick={() => updateProfileRegistrations(currentRegistrations - 5)}
-                  className="p-2.5 rounded-xl border border-neutral-850 bg-neutral-900 text-neutral-300 hover:text-white hover:bg-neutral-950 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                  aria-label="Decrease scouts count by 5"
-                >
-                  <Minus size={14} />
-                </button>
-                <div className="px-6 py-2 rounded-xl border border-neutral-850 bg-black font-mono font-black text-center min-w-[90px] text-primary">
-                  {currentRegistrations}
-                </div>
-                <button
-                  onClick={() => updateProfileRegistrations(currentRegistrations + 5)}
-                  className="p-2.5 rounded-xl border border-neutral-850 bg-neutral-900 text-neutral-300 hover:text-white hover:bg-neutral-950 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                  aria-label="Increase scouts count by 5"
-                >
-                  <Plus size={14} />
-                </button>
               </div>
             </div>
           </GlassCard>
