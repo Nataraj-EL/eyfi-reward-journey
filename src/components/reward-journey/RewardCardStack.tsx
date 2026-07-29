@@ -36,16 +36,14 @@ export const RewardCardStack: React.FC<RewardCardStackProps> = ({
       {...props}
     >
       <motion.div
-        className="w-full h-full relative [transform-style:preserve-3d] transition-all duration-700"
+        className="w-full h-full relative [transform-style:preserve-3d]"
         animate={{ rotateY: isFlipped ? 180 : 0 }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
       >
         
         {/* CARD FRONT: Mascot Art & Level Title */}
         <div
-          className={cn(
-            "absolute inset-0 w-full h-full glass-panel border-2 border-primary/30 rounded-2xl p-6 flex flex-col justify-between items-center text-center shadow-[0_10px_30px_rgba(163,230,53,0.15)] overflow-hidden transition-all duration-300",
-            isFlipped ? "opacity-0 pointer-events-none invisible" : "opacity-100 visible"
-          )}
+          className="absolute inset-0 w-full h-full bg-[#0d0d0d] border-2 border-primary/30 rounded-2xl p-6 flex flex-col justify-between items-center text-center shadow-[0_10px_30px_rgba(163,230,53,0.15)] overflow-hidden"
           style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
         >
           {/* Accent Glow backdrop */}
@@ -55,7 +53,7 @@ export const RewardCardStack: React.FC<RewardCardStackProps> = ({
             <Badge variant="primary" glow className="text-[10px]">
               <Award size={10} className="mr-1" /> COLLECTIBLE CARD
             </Badge>
-            <span className="text-[10px] text-neutral-500 font-mono">EYFI AMBASSADOR</span>
+            <span className="text-[10px] text-neutral-550 font-mono">EYFI AMBASSADOR</span>
           </div>
 
           {/* Center Mascot display */}
@@ -85,11 +83,8 @@ export const RewardCardStack: React.FC<RewardCardStackProps> = ({
 
         {/* CARD BACK: Unlocked Perks list */}
         <div
-          className={cn(
-            "absolute inset-0 w-full h-full glass-panel border-2 border-emerald-500/30 rounded-2xl p-6 flex flex-col justify-between shadow-[0_10px_30px_rgba(16,185,129,0.15)] overflow-hidden transition-all duration-300",
-            isFlipped ? "opacity-100 visible [transform:rotateY(180deg)]" : "opacity-0 pointer-events-none invisible [transform:rotateY(180deg)]"
-          )}
-          style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+          className="absolute inset-0 w-full h-full bg-[#0d0d0d] border-2 border-emerald-500/30 rounded-2xl p-6 flex flex-col justify-between shadow-[0_10px_30px_rgba(16,185,129,0.15)] overflow-hidden"
+          style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
         >
           {/* Success gradient backdrop */}
           <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-emerald-500/10 to-transparent pointer-events-none" />

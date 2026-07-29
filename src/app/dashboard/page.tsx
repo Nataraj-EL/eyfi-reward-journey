@@ -24,7 +24,12 @@ export default function Dashboard() {
 
   // Load persistent configurations on mount
   React.useEffect(() => {
-    const loadedProfiles = loadPersistentProfiles(MOCK_PROFILES);
+    let loadedProfiles = loadPersistentProfiles(MOCK_PROFILES);
+    // Force-reset persistent profiles cache if they contain old naming keys to clear local cache
+    if (loadedProfiles.some((p) => p.name === "Aarav Sharma")) {
+      loadedProfiles = MOCK_PROFILES;
+      savePersistentProfiles(MOCK_PROFILES);
+    }
     setTimeout(() => {
       setProfiles(loadedProfiles);
       setIsHydrated(true);
@@ -173,13 +178,13 @@ export default function Dashboard() {
         
         {/* SIMULATOR & CONTROL SECTION */}
         <section aria-label="Dynamic Simulator Controls">
-          <GlassCard className="border border-primary/20 bg-primary/5 p-6 flex flex-col items-center justify-center text-center gap-6" hoverEffect={false}>
+          <GlassCard className="border border-neutral-900 bg-neutral-950/60 p-6 flex flex-col sm:flex-row items-center justify-between gap-6" hoverEffect={false}>
             {/* Profile Switcher */}
-            <div className="flex flex-col items-center gap-2 w-full">
+            <div className="flex flex-col items-center sm:items-start gap-2 w-full sm:w-auto">
               <span className="text-[10px] text-neutral-400 font-bold uppercase tracking-wider select-none">
                 Select Ambassador Profile
               </span>
-              <div className="flex flex-wrap justify-center gap-2">
+              <div className="flex flex-wrap justify-center sm:justify-start gap-2">
                 {profiles.map((p) => (
                   <button
                     key={p.id}
@@ -187,7 +192,7 @@ export default function Dashboard() {
                     className={`px-4 py-2 rounded-xl text-xs font-extrabold border transition-all ${
                       activeProfileId === p.id
                         ? "bg-primary text-black border-primary shadow-[0_0_15px_rgba(163,230,53,0.3)]"
-                        : "bg-neutral-950 border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-700"
+                        : "bg-neutral-900 border-neutral-850 text-neutral-450 hover:text-white hover:border-neutral-700"
                     }`}
                   >
                     {p.name} ({p.scoutsRegisteredCount} Scouts)
@@ -197,24 +202,24 @@ export default function Dashboard() {
             </div>
 
             {/* Registration Changer controls */}
-            <div className="flex flex-col items-center gap-2 w-full">
+            <div className="flex flex-col items-center sm:items-end gap-2 w-full sm:w-auto">
               <span className="text-[10px] text-neutral-400 font-bold uppercase tracking-wider select-none">
-                Simulate Scout Registrations
+                Simulate Registrations
               </span>
               <div className="flex items-center justify-center gap-3">
                 <button
                   onClick={() => updateProfileRegistrations(currentRegistrations - 5)}
-                  className="p-2.5 rounded-xl border border-neutral-800 bg-neutral-950 text-neutral-300 hover:text-white hover:bg-neutral-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  className="p-2.5 rounded-xl border border-neutral-850 bg-neutral-900 text-neutral-300 hover:text-white hover:bg-neutral-950 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   aria-label="Decrease scouts count by 5"
                 >
                   <Minus size={14} />
                 </button>
-                <div className="px-6 py-2 rounded-xl border border-neutral-900 bg-black font-mono font-black text-center min-w-[90px] text-primary">
+                <div className="px-6 py-2 rounded-xl border border-neutral-850 bg-black font-mono font-black text-center min-w-[90px] text-primary">
                   {currentRegistrations}
                 </div>
                 <button
                   onClick={() => updateProfileRegistrations(currentRegistrations + 5)}
-                  className="p-2.5 rounded-xl border border-neutral-800 bg-neutral-950 text-neutral-300 hover:text-white hover:bg-neutral-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  className="p-2.5 rounded-xl border border-neutral-850 bg-neutral-900 text-neutral-300 hover:text-white hover:bg-neutral-950 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   aria-label="Increase scouts count by 5"
                 >
                   <Plus size={14} />
