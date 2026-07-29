@@ -9,8 +9,9 @@ import { RewardJourney } from "@/components/reward-journey/RewardJourney";
 import { MOCK_PROFILES, AmbassadorProfile } from "@/data/ambassador";
 import { REWARD_MILESTONES, MASCOT_PATHS } from "@/data/rewards";
 import { loadPersistentProfiles, savePersistentProfiles, loadClaimedRewards, saveClaimedRewards } from "@/utils/persistence";
-import { ArrowLeft, LayoutDashboard, Sparkles, RefreshCw, CheckCircle } from "lucide-react";
+import { ArrowLeft, LayoutDashboard, Sparkles, RefreshCw, CheckCircle, Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { getMuteState, setMuteState } from "@/utils/audio";
 import { GlassCard } from "@/components/ui/GlassCard";
 import Image from "next/image";
 
@@ -21,9 +22,11 @@ export default function Dashboard() {
   const [activeProfileId, setActiveProfileId] = React.useState<string>("aarav");
   const [claimedIds, setClaimedIds] = React.useState<number[]>([]);
   const [activeView, setActiveView] = React.useState<"dashboard" | "achievements">("dashboard");
+  const [isMuted, setIsMuted] = React.useState(false);
 
   // Load persistent configurations on mount
   React.useEffect(() => {
+    setIsMuted(getMuteState());
     let loadedProfiles = loadPersistentProfiles(MOCK_PROFILES);
     // Force-reset persistent profiles cache if they contain old naming keys or outdated mock registration counts
     if (loadedProfiles.some((p) => p.name === "Aarav Sharma" || (p.id === "rohan" && p.scoutsRegisteredCount !== 202))) {
@@ -35,6 +38,12 @@ export default function Dashboard() {
       setIsHydrated(true);
     }, 0);
   }, []);
+
+  const toggleMute = () => {
+    const nextMuted = !isMuted;
+    setIsMuted(nextMuted);
+    setMuteState(nextMuted);
+  };
 
   // Retrieve current active profile object
   const currentProfile = profiles.find((p) => p.id === activeProfileId) || profiles[0];
@@ -169,7 +178,17 @@ export default function Dashboard() {
           </nav>
         </div>
 
-        <div className="flex items-center gap-3 flex-shrink-0 flex-nowrap">
+        <div className="flex items-center gap-2 flex-shrink-0 flex-nowrap">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={toggleMute}
+            leftIcon={isMuted ? <VolumeX size={12} /> : <Volume2 size={12} />}
+            className="h-8 border-neutral-850 text-xs px-2 sm:px-2.5 hover:bg-neutral-900 select-none"
+            aria-label={isMuted ? "Unmute sounds" : "Mute sounds"}
+          >
+            <span className="hidden xs:inline">{isMuted ? "Muted" : "Sound"}</span>
+          </Button>
           <Button
             variant="outline"
             size="sm"
@@ -179,7 +198,7 @@ export default function Dashboard() {
           >
             Reset State
           </Button>
-          <span className="text-[10px] bg-neutral-900 text-neutral-400 border border-neutral-850 px-3 py-1 rounded-full font-mono font-semibold uppercase tracking-wider select-none hidden sm:block whitespace-nowrap">
+          <span className="text-[10px] bg-neutral-900 text-neutral-450 border border-neutral-850 px-3 py-1 rounded-full font-mono font-semibold uppercase tracking-wider select-none hidden sm:block whitespace-nowrap">
             Wave 01 Live
           </span>
         </div>

@@ -6,6 +6,7 @@ import { RewardCardStack } from "./RewardCardStack";
 import { Button } from "@/components/ui/Button";
 import { Sparkles, Trophy, X, Gift } from "lucide-react";
 import { cn } from "@/utils/cn";
+import { playChestOpenSound, playChimeSuccessSound } from "@/utils/audio";
 
 export interface RewardUnlockProps {
   isOpen: boolean;
@@ -44,10 +45,12 @@ export const RewardUnlock: React.FC<RewardUnlockProps> = ({
   const handleOpenChest = () => {
     if (phase !== "closed") return;
     setPhase("opening");
+    playChestOpenSound();
     
     // Auto transition to card reveal phase after chest open anim stabilization
     setTimeout(() => {
       setPhase("revealed");
+      playChimeSuccessSound();
     }, 1200);
   };
 
