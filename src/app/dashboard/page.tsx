@@ -9,7 +9,7 @@ import { RewardJourney } from "@/components/reward-journey/RewardJourney";
 import { MOCK_PROFILES, AmbassadorProfile } from "@/data/ambassador";
 import { REWARD_MILESTONES, MASCOT_PATHS } from "@/data/rewards";
 import { loadPersistentProfiles, savePersistentProfiles, loadClaimedRewards, saveClaimedRewards } from "@/utils/persistence";
-import { ArrowLeft, LayoutDashboard, Sparkles, RefreshCw, CheckCircle, Volume2, VolumeX } from "lucide-react";
+import { ArrowLeft, Sparkles, RefreshCw, CheckCircle, Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { getMuteState, setMuteState } from "@/utils/audio";
 import { GlassCard } from "@/components/ui/GlassCard";
