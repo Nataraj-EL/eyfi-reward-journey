@@ -43,8 +43,11 @@ export const RewardCardStack: React.FC<RewardCardStackProps> = ({
         
         {/* CARD FRONT: Mascot Art & Level Title */}
         <div
-          className="absolute inset-0 w-full h-full bg-[#0d0d0d] border-2 border-primary/30 rounded-2xl p-6 flex flex-col justify-between items-center text-center shadow-[0_10px_30px_rgba(163,230,53,0.15)] overflow-hidden"
-          style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+          className={cn(
+            "absolute inset-0 w-full h-full bg-[#0d0d0d] border-2 border-primary/30 rounded-2xl p-6 flex flex-col justify-between items-center text-center shadow-[0_10px_30px_rgba(163,230,53,0.15)] overflow-hidden",
+            isFlipped ? "opacity-0 pointer-events-none invisible" : "opacity-100 visible"
+          )}
+          style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: "rotateY(0deg)" }}
         >
           {/* Accent Glow backdrop */}
           <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-primary/10 to-transparent pointer-events-none" />
@@ -83,7 +86,10 @@ export const RewardCardStack: React.FC<RewardCardStackProps> = ({
 
         {/* CARD BACK: Unlocked Perks list */}
         <div
-          className="absolute inset-0 w-full h-full bg-[#0d0d0d] border-2 border-emerald-500/30 rounded-2xl p-6 flex flex-col justify-between shadow-[0_10px_30px_rgba(16,185,129,0.15)] overflow-hidden"
+          className={cn(
+            "absolute inset-0 w-full h-full bg-[#0d0d0d] border-2 border-emerald-500/30 rounded-2xl p-6 flex flex-col justify-between shadow-[0_10px_30px_rgba(16,185,129,0.15)] overflow-hidden",
+            isFlipped ? "opacity-100 visible" : "opacity-0 pointer-events-none invisible"
+          )}
           style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
         >
           {/* Success gradient backdrop */}
