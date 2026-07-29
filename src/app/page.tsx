@@ -89,7 +89,11 @@ export default function Home() {
 
         {/* Right CTA Button */}
         <div>
-          <Link href="#apply">
+          <Link
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdEyk8r0LafnYE84xWKErM9GsYG6cW0oT9D52KOsn-IH68AQw/viewform?usp=send_form"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Button
               variant="primary"
               className="bg-[#A3E635] text-black font-bold px-6 py-2 rounded-full text-sm hover:bg-[#C0FF3E] hover:shadow-[0_0_20px_rgba(163,230,53,0.6)] transition-all duration-300"
@@ -149,7 +153,11 @@ export default function Home() {
 
         {/* Primary CTA buttons */}
         <div className="flex flex-wrap items-center justify-center gap-4 mb-16">
-          <Link href="#apply">
+          <Link
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdEyk8r0LafnYE84xWKErM9GsYG6cW0oT9D52KOsn-IH68AQw/viewform?usp=send_form"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Button
               variant="primary"
               size="lg"
