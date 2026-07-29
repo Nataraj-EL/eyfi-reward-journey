@@ -14,6 +14,7 @@ export interface AmbassadorHeaderProps extends React.HTMLAttributes<HTMLDivEleme
   rank: number;
   totalPoints: number;
   registrations: number;
+  tierName: string;
   avatarPlaceholderText?: string;
   avatarImageUrl?: string;
 }
@@ -25,6 +26,7 @@ export const AmbassadorHeader: React.FC<AmbassadorHeaderProps> = ({
   rank,
   totalPoints,
   registrations,
+  tierName,
   avatarPlaceholderText = "AS",
   avatarImageUrl,
   ...props
@@ -63,7 +65,7 @@ export const AmbassadorHeader: React.FC<AmbassadorHeaderProps> = ({
             <div className="flex items-center gap-2 justify-center sm:justify-start">
               <h3 className="text-xl font-bold tracking-tight text-foreground">{name}</h3>
               <Badge variant="primary" glow className="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5">
-                Active Contributor
+                {tierName}
               </Badge>
             </div>
             <p className="text-xs text-neutral-400 flex items-center gap-1.5 justify-center sm:justify-start mt-1">

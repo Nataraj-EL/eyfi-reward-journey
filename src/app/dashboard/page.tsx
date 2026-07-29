@@ -224,6 +224,7 @@ export default function Dashboard() {
                 rank={currentProfile.rank}
                 totalPoints={totalPoints}
                 registrations={currentRegistrations}
+                tierName={currentTier.name}
                 avatarPlaceholderText={currentProfile.avatarPlaceholderText}
                 avatarImageUrl={currentTier.mascotPath}
               />
