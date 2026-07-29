@@ -3,14 +3,13 @@
 import * as React from "react";
 import Link from "next/link";
 import { AmbassadorHeader } from "@/components/dashboard/AmbassadorHeader";
-import { MetricsGrid } from "@/components/dashboard/MetricsGrid";
 import { LevelCard } from "@/components/dashboard/LevelCard";
 import { NextMilestoneCard } from "@/components/dashboard/NextMilestoneCard";
 import { RewardJourney } from "@/components/reward-journey/RewardJourney";
 import { MOCK_PROFILES, AmbassadorProfile } from "@/data/ambassador";
 import { REWARD_MILESTONES, MASCOT_PATHS } from "@/data/rewards";
 import { loadPersistentProfiles, savePersistentProfiles, loadClaimedRewards, saveClaimedRewards } from "@/utils/persistence";
-import { ArrowLeft, LayoutDashboard, Compass, Sparkles, Plus, Minus, RefreshCw, CheckCircle } from "lucide-react";
+import { ArrowLeft, LayoutDashboard, Sparkles, Plus, Minus, RefreshCw, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { GlassCard } from "@/components/ui/GlassCard";
 import Image from "next/image";
@@ -251,24 +250,9 @@ export default function Dashboard() {
                 university={currentProfile.university}
                 rank={currentProfile.rank}
                 totalPoints={totalPoints}
+                registrations={currentRegistrations}
                 avatarPlaceholderText={currentProfile.avatarPlaceholderText}
                 avatarImageUrl={currentTier.mascotPath}
-              />
-            </section>
-
-            {/* Action Title */}
-            <div className="border-b border-neutral-900 pb-3 flex items-center gap-2 select-none">
-              <Compass size={18} className="text-accent" />
-              <h2 className="text-lg font-extrabold tracking-tight">Active Performance metrics</h2>
-            </div>
-
-            {/* Metrics Grid */}
-            <section aria-label="Ambassador Campaign metrics">
-              <MetricsGrid
-                scoutsRegisteredCount={currentRegistrations}
-                targetScouts={currentProfile.targetScouts}
-                verificationRate={currentProfile.verificationRate}
-                waveActive={currentProfile.waveActive}
               />
             </section>
 

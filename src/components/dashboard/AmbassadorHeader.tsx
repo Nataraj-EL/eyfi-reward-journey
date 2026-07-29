@@ -4,7 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { Badge } from "@/components/ui/Badge";
-import { Trophy, School, Award } from "lucide-react";
+import { Trophy, School, Award, Users } from "lucide-react";
 
 import { cn } from "@/utils/cn";
 
@@ -13,6 +13,7 @@ export interface AmbassadorHeaderProps extends React.HTMLAttributes<HTMLDivEleme
   university: string;
   rank: number;
   totalPoints: number;
+  registrations: number;
   avatarPlaceholderText?: string;
   avatarImageUrl?: string;
 }
@@ -23,6 +24,7 @@ export const AmbassadorHeader: React.FC<AmbassadorHeaderProps> = ({
   university,
   rank,
   totalPoints,
+  registrations,
   avatarPlaceholderText = "AS",
   avatarImageUrl,
   ...props
@@ -72,11 +74,20 @@ export const AmbassadorHeader: React.FC<AmbassadorHeaderProps> = ({
         </div>
 
         {/* Level Stats Summary */}
-        <div className="flex gap-4 items-center w-full sm:w-auto border-t border-neutral-900 pt-4 sm:pt-0 sm:border-0 justify-around">
+        <div className="flex gap-4 sm:gap-6 items-center w-full sm:w-auto border-t border-neutral-900 pt-4 sm:pt-0 sm:border-0 justify-around sm:justify-end">
           
           <div className="flex flex-col items-center sm:items-end">
             <span className="text-[10px] text-neutral-500 uppercase tracking-wider font-semibold mb-1 flex items-center gap-1">
-              <Trophy size={11} className="text-accent" aria-hidden="true" /> Campus Rank
+              <Users size={11} className="text-primary" aria-hidden="true" /> Registrations
+            </span>
+            <strong className="text-2xl font-black text-foreground">{registrations}</strong>
+          </div>
+          
+          <div className="h-8 w-px bg-neutral-850 hidden sm:block" />
+
+          <div className="flex flex-col items-center sm:items-end">
+            <span className="text-[10px] text-neutral-500 uppercase tracking-wider font-semibold mb-1 flex items-center gap-1">
+              <Trophy size={11} className="text-accent" aria-hidden="true" /> Overall Rank
             </span>
             <strong className="text-2xl font-black text-foreground">#{rank}</strong>
           </div>
