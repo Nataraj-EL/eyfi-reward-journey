@@ -142,14 +142,14 @@ export default function Dashboard() {
       <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-accent/5 rounded-full blur-[140px] pointer-events-none" />
 
       {/* Header Bar */}
-      <header className="sticky top-0 z-50 border-b border-neutral-900 bg-[#050505]/85 backdrop-blur-md py-4 px-6 sm:px-8 flex justify-between items-center">
-        <div className="flex items-center gap-4">
-          <Link href="/" className="text-slate-400 hover:text-primary transition-colors flex items-center gap-2 text-xs font-semibold select-none mr-2">
+      <header className="sticky top-0 z-50 border-b border-neutral-900 bg-[#050505]/85 backdrop-blur-md py-4 px-4 sm:px-8 flex justify-between items-center">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <Link href="/" className="text-slate-400 hover:text-primary transition-colors flex items-center gap-2 text-xs font-semibold select-none mr-1 sm:mr-2">
             <ArrowLeft size={14} aria-hidden="true" />
             <span>Landing Page</span>
           </Link>
           <div className="h-6 w-px bg-neutral-900 hidden sm:block" />
-          <nav className="flex items-center gap-5 text-xs font-black select-none">
+          <nav className="flex items-center gap-3.5 sm:gap-5 text-xs font-black select-none">
             <button
               onClick={() => setActiveView("dashboard")}
               className={`transition-colors py-1 cursor-pointer ${
@@ -164,7 +164,7 @@ export default function Dashboard() {
                 activeView === "achievements" ? "text-primary border-b-2 border-primary" : "text-slate-400 hover:text-white"
               }`}
             >
-              Achievement History
+              Achievements<span className="hidden sm:inline"> History</span>
             </button>
           </nav>
         </div>
@@ -174,10 +174,10 @@ export default function Dashboard() {
             variant="outline"
             size="sm"
             onClick={handleResetSimulator}
-            className="h-8 border-neutral-800 text-xs px-3 hover:bg-neutral-900 select-none flex items-center justify-center flex-row flex-nowrap whitespace-nowrap"
+            leftIcon={<RefreshCw size={12} />}
+            className="h-8 border-neutral-800 text-xs px-2.5 hover:bg-neutral-900 select-none"
           >
-            <RefreshCw size={12} className="mr-1.5 flex-shrink-0" />
-            <span>Reset State</span>
+            Reset State
           </Button>
           <span className="text-[10px] bg-neutral-900 text-neutral-400 border border-neutral-850 px-3 py-1 rounded-full font-mono font-semibold uppercase tracking-wider select-none hidden sm:block whitespace-nowrap">
             Wave 01 Live
@@ -190,13 +190,13 @@ export default function Dashboard() {
         
         {/* SIMULATOR & CONTROL SECTION */}
         <section aria-label="Dynamic Simulator Controls">
-          <GlassCard className="border border-neutral-900 bg-neutral-950/60 p-6 flex flex-col sm:flex-row items-center justify-between gap-6" hoverEffect={false}>
+          <GlassCard className="border border-neutral-900 bg-neutral-950/60 p-6 flex flex-col lg:flex-row items-center justify-between gap-6" hoverEffect={false}>
             {/* Profile Switcher */}
-            <div className="flex flex-col items-center sm:items-start gap-2 w-full sm:w-auto">
+            <div className="flex flex-col items-center lg:items-start gap-2 w-full lg:w-auto">
               <span className="text-[10px] text-neutral-400 font-bold uppercase tracking-wider select-none">
                 Select Ambassador Profile
               </span>
-              <div className="flex flex-wrap justify-center sm:justify-start gap-2">
+              <div className="flex flex-wrap justify-center lg:justify-start gap-2">
                 {profiles.map((p) => (
                   <button
                     key={p.id}
@@ -207,14 +207,14 @@ export default function Dashboard() {
                         : "bg-neutral-900 border-neutral-850 text-neutral-450 hover:text-white hover:border-neutral-700"
                     }`}
                   >
-                    {p.name} ({p.scoutsRegisteredCount} Scouts)
+                    {p.name} ({p.scoutsRegisteredCount} Registrations)
                   </button>
                 ))}
               </div>
             </div>
 
             {/* Registration Changer controls */}
-            <div className="flex flex-col items-center sm:items-end gap-2 w-full sm:w-auto">
+            <div className="flex flex-col items-center lg:items-end gap-2 w-full lg:w-auto">
               <span className="text-[10px] text-neutral-400 font-bold uppercase tracking-wider select-none">
                 Simulate Registrations
               </span>
