@@ -25,7 +25,7 @@ export const RewardPath: React.FC<RewardPathProps> = ({
         {/* Glow Filter definition */}
         <defs>
           <filter id="neon-glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="5" result="blur" />
+            <feGaussianBlur stdDeviation="2.5" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
@@ -39,8 +39,8 @@ export const RewardPath: React.FC<RewardPathProps> = ({
           y1="6"
           x2="100%"
           y2="6"
-          stroke="#1f1f1f"
-          strokeWidth="6"
+          stroke="#1c1c1c"
+          strokeWidth="3"
           strokeLinecap="round"
         />
 
@@ -51,7 +51,7 @@ export const RewardPath: React.FC<RewardPathProps> = ({
           x2={`${progressPercentage}%`}
           y2="6"
           stroke="var(--primary)"
-          strokeWidth="6"
+          strokeWidth="3"
           strokeLinecap="round"
           filter="url(#neon-glow)"
           initial={{ x2: "0%" }}
@@ -64,12 +64,12 @@ export const RewardPath: React.FC<RewardPathProps> = ({
           <motion.circle
             cx={`${progressPercentage}%`}
             cy="6"
-            r="6"
+            r="4.5"
             fill="#FFFFFF"
-            filter="drop-shadow(0 0 8px var(--primary))"
+            filter="drop-shadow(0 0 6px var(--primary))"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ 
-              scale: [1, 1.4, 1],
+              scale: [1, 1.3, 1],
               opacity: [0.8, 1, 0.8]
             }}
             transition={{ 
