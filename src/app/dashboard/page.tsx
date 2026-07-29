@@ -21,6 +21,7 @@ export default function Dashboard() {
   const [profiles, setProfiles] = React.useState<AmbassadorProfile[]>(MOCK_PROFILES);
   const [activeProfileId, setActiveProfileId] = React.useState<string>("aarav");
   const [claimedIds, setClaimedIds] = React.useState<number[]>([]);
+  const [activeView, setActiveView] = React.useState<"dashboard" | "achievements">("dashboard");
 
   // Load persistent configurations on mount
   React.useEffect(() => {
@@ -143,18 +144,30 @@ export default function Dashboard() {
 
       {/* Header Bar */}
       <header className="sticky top-0 z-50 border-b border-neutral-900 bg-[#050505]/85 backdrop-blur-md py-4 px-6 sm:px-8 flex justify-between items-center">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           <Link href="/" className="text-slate-400 hover:text-primary transition-colors flex items-center gap-2 text-xs font-semibold select-none mr-2">
             <ArrowLeft size={14} aria-hidden="true" />
             <span>Landing Page</span>
           </Link>
           <div className="h-6 w-px bg-neutral-900 hidden sm:block" />
-          <div className="flex items-center gap-2">
-            <LayoutDashboard size={18} className="text-primary" />
-            <h1 className="text-sm font-bold tracking-tight select-none">
-              EYFI Ambassador Dashboard
-            </h1>
-          </div>
+          <nav className="flex items-center gap-5 text-xs font-black select-none">
+            <button
+              onClick={() => setActiveView("dashboard")}
+              className={`transition-colors py-1 cursor-pointer ${
+                activeView === "dashboard" ? "text-primary border-b-2 border-primary" : "text-slate-400 hover:text-white"
+              }`}
+            >
+              Dashboard
+            </button>
+            <button
+              onClick={() => setActiveView("achievements")}
+              className={`transition-colors py-1 cursor-pointer ${
+                activeView === "achievements" ? "text-primary border-b-2 border-primary" : "text-slate-400 hover:text-white"
+              }`}
+            >
+              Achievement History
+            </button>
+          </nav>
         </div>
 
         <div className="flex items-center gap-3 flex-shrink-0 flex-nowrap">
@@ -229,126 +242,104 @@ export default function Dashboard() {
           </GlassCard>
         </section>
 
-        {/* Profile Welcome greeting */}
-        <section aria-label="Ambassador Profile Welcome">
-          <AmbassadorHeader
-            name={currentProfile.name}
-            university={currentProfile.university}
-            rank={currentProfile.rank}
-            totalPoints={totalPoints}
-            avatarPlaceholderText={currentProfile.avatarPlaceholderText}
-            avatarImageUrl={currentTier.mascotPath}
-          />
-        </section>
+        {activeView === "dashboard" ? (
+          <>
+            {/* Profile Welcome greeting */}
+            <section aria-label="Ambassador Profile Welcome">
+              <AmbassadorHeader
+                name={currentProfile.name}
+                university={currentProfile.university}
+                rank={currentProfile.rank}
+                totalPoints={totalPoints}
+                avatarPlaceholderText={currentProfile.avatarPlaceholderText}
+                avatarImageUrl={currentTier.mascotPath}
+              />
+            </section>
 
-        {/* Action Title */}
-        <div className="border-b border-neutral-900 pb-3 flex items-center gap-2 select-none">
-          <Compass size={18} className="text-accent" />
-          <h2 className="text-lg font-extrabold tracking-tight">Active Performance metrics</h2>
-        </div>
+            {/* Action Title */}
+            <div className="border-b border-neutral-900 pb-3 flex items-center gap-2 select-none">
+              <Compass size={18} className="text-accent" />
+              <h2 className="text-lg font-extrabold tracking-tight">Active Performance metrics</h2>
+            </div>
 
-        {/* Metrics Grid */}
-        <section aria-label="Ambassador Campaign metrics">
-          <MetricsGrid
-            scoutsRegisteredCount={currentRegistrations}
-            targetScouts={currentProfile.targetScouts}
-            verificationRate={currentProfile.verificationRate}
-            waveActive={currentProfile.waveActive}
-          />
-        </section>
+            {/* Metrics Grid */}
+            <section aria-label="Ambassador Campaign metrics">
+              <MetricsGrid
+                scoutsRegisteredCount={currentRegistrations}
+                targetScouts={currentProfile.targetScouts}
+                verificationRate={currentProfile.verificationRate}
+                waveActive={currentProfile.waveActive}
+              />
+            </section>
 
-        {/* Interactive Milestone Journey */}
-        <section aria-label="Ambassador Reward Milestone Ladder">
-          <RewardJourney ambassadorData={ambassadorData} />
-        </section>
+            {/* Interactive Milestone Journey */}
+            <section aria-label="Ambassador Reward Milestone Ladder">
+              <RewardJourney ambassadorData={ambassadorData} />
+            </section>
+          </>
+        ) : (
+          /* ACHIEVEMENT HISTORY SECTION (separate view page) */
+          <section aria-label="Ambassador Achievement History Logs" className="space-y-6 flex-grow">
+            <div className="border-b border-neutral-900 pb-3 flex items-center gap-2 select-none">
+              <Sparkles size={18} className="text-emerald-500" />
+              <h2 className="text-lg font-extrabold tracking-tight">Unlocked Achievement History</h2>
+            </div>
 
-        {/* Level Progression Grid */}
-        <section aria-label="Ambassador Tiers Overview" className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Unlocked Tier Details */}
-          <div className="flex flex-col gap-3">
-            <LevelCard
-              levelName={currentTier.name}
-              mascotPath={currentTier.mascotPath}
-              description={currentTier.description}
-              unlockedBenefits={currentTier.perks}
-              className="h-full"
-            />
-          </div>
+            {completedMilestones.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {completedMilestones.map((milestone) => {
+                  const isClaimed = claimedIds.includes(milestone.id);
 
-          {/* Locked Next Milestone Details */}
-          <div className="flex flex-col gap-3">
-            <NextMilestoneCard
-              nextLevelName={nextMilestone?.name || "Founding Team"}
-              nextLevelMascotPath={nextMilestone?.mascotPath || MASCOT_PATHS.founder}
-              pointsRequired={(nextMilestone?.registrationsRequired || 200) * 100}
-              currentPoints={totalPoints}
-              pendingBenefits={nextMilestone?.perks || []}
-              className="h-full"
-            />
-          </div>
-        </section>
-
-        {/* ACHIEVEMENT HISTORY SECTION */}
-        <section aria-label="Ambassador Achievement History Logs" className="space-y-6">
-          <div className="border-b border-neutral-900 pb-3 flex items-center gap-2 select-none">
-            <Sparkles size={18} className="text-emerald-500" />
-            <h2 className="text-lg font-extrabold tracking-tight">Unlocked Achievement History</h2>
-          </div>
-
-          {completedMilestones.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {completedMilestones.map((milestone) => {
-                const isClaimed = claimedIds.includes(milestone.id);
-
-                return (
-                  <GlassCard key={milestone.id} className="flex gap-4 p-5 items-center border border-neutral-900 bg-neutral-950/40 relative overflow-hidden" hoverEffect>
-                    {/* Tiny Mascot visual icon */}
-                    <div className="relative w-16 h-16 rounded-xl bg-neutral-900 flex items-center justify-center p-1 border border-neutral-850 flex-shrink-0">
-                      <Image
-                        src={`${milestone.mascotPath}?v=2`}
-                        alt={`${milestone.name} Mini Mascot`}
-                        fill
-                        sizes="60px"
-                        className="object-contain p-1.5"
-                      />
-                    </div>
-
-                    <div className="flex-grow flex flex-col justify-between h-full py-0.5">
-                      <div>
-                        <h4 className="text-sm font-bold text-foreground truncate">
-                          {milestone.name}
-                        </h4>
-                        <span className="text-[10px] text-neutral-500 font-mono block mt-0.5 select-none">
-                          Unlocked at {milestone.registrationsRequired} Scouts
-                        </span>
+                  return (
+                    <GlassCard key={milestone.id} className="flex gap-4 p-5 items-center border border-neutral-900 bg-neutral-950/40 relative overflow-hidden" hoverEffect>
+                      {/* Tiny Mascot visual icon */}
+                      <div className="relative w-16 h-16 rounded-xl bg-neutral-900 flex items-center justify-center p-1 border border-neutral-850 flex-shrink-0">
+                        <Image
+                          src={`${milestone.mascotPath}?v=2`}
+                          alt={`${milestone.name} Mini Mascot`}
+                          fill
+                          sizes="60px"
+                          className="object-contain p-1.5"
+                        />
                       </div>
 
-                      {/* Claim reward status button */}
-                      <div className="mt-3">
-                        {isClaimed ? (
-                          <div className="text-emerald-500 font-semibold text-xs flex items-center gap-1.5 select-none">
-                            <CheckCircle size={14} /> Unlocks Claimed
-                          </div>
-                        ) : (
-                          <button
-                            onClick={() => handleClaimReward(milestone.id)}
-                            className="bg-primary hover:bg-primary-foreground text-black text-[11px] font-extrabold px-3 py-1.5 rounded-lg border border-primary transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary shadow-[0_0_10px_rgba(163,230,53,0.15)]"
-                          >
-                            Claim Reward
-                          </button>
-                        )}
+                      <div className="flex-grow flex flex-col justify-between h-full py-0.5">
+                        <div>
+                          <h4 className="text-sm font-bold text-foreground truncate">
+                            {milestone.name}
+                          </h4>
+                          <span className="text-[10px] text-neutral-500 font-mono block mt-0.5 select-none">
+                            Unlocked at {milestone.registrationsRequired} Registrations
+                          </span>
+                        </div>
+
+                        {/* Claim reward status button */}
+                        <div className="mt-3">
+                          {isClaimed ? (
+                            <div className="text-emerald-500 font-semibold text-xs flex items-center gap-1.5 select-none">
+                              <CheckCircle size={14} /> Unlocks Claimed
+                            </div>
+                          ) : (
+                            <button
+                              onClick={() => handleClaimReward(milestone.id)}
+                              className="bg-primary hover:bg-primary-foreground text-black text-[11px] font-extrabold px-3 py-1.5 rounded-lg border border-primary transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary shadow-[0_0_10px_rgba(163,230,53,0.15)]"
+                            >
+                              Claim Reward
+                            </button>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  </GlassCard>
-                );
-              })}
-            </div>
-          ) : (
-            <div className="text-center p-8 rounded-2xl border border-neutral-900 text-neutral-500">
-              No milestones unlocked yet. Build registrations to get started!
-            </div>
-          )}
-        </section>
+                    </GlassCard>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="text-center p-8 rounded-2xl border border-neutral-900 text-neutral-500">
+                No milestones unlocked yet. Build registrations to get started!
+              </div>
+            )}
+          </section>
+        )}
 
       </main>
 
