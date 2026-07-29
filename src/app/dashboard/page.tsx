@@ -293,13 +293,17 @@ export default function Dashboard() {
                         {/* Claim reward status button */}
                         <div className="mt-3">
                           {isClaimed ? (
-                            <div className="text-emerald-500 font-semibold text-xs flex items-center gap-1.5 select-none">
-                              <CheckCircle size={14} /> Unlocks Claimed
-                            </div>
+                            <button
+                              disabled
+                              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-[11px] font-black text-primary/80 bg-primary/10 border border-primary/20 shadow-[0_0_10px_rgba(163,230,53,0.1)] transition-all duration-300 select-none opacity-90"
+                            >
+                              <CheckCircle size={13} className="stroke-[2.5]" />
+                              <span>Claimed</span>
+                            </button>
                           ) : (
                             <button
                               onClick={() => handleClaimReward(milestone.id)}
-                              className="bg-primary hover:bg-primary-foreground text-black text-[11px] font-extrabold px-3 py-1.5 rounded-lg border border-primary transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary shadow-[0_0_10px_rgba(163,230,53,0.15)]"
+                              className="inline-flex items-center justify-center gap-1 px-3.5 py-1.5 rounded-xl text-[11px] font-black text-black bg-gradient-to-r from-primary to-[#bef264] border border-primary/20 shadow-[0_0_10px_rgba(163,230,53,0.2)] transition-all duration-200 hover:scale-[1.03] hover:shadow-[0_0_15px_rgba(163,230,53,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-pointer select-none"
                             >
                               Claim Reward
                             </button>
