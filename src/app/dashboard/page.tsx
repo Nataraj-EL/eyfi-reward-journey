@@ -190,13 +190,13 @@ export default function Dashboard() {
         
         {/* SIMULATOR & CONTROL SECTION */}
         <section aria-label="Dynamic Simulator Controls">
-          <GlassCard className="border border-neutral-900 bg-neutral-950/60 p-6 flex flex-col md:flex-row items-center justify-between gap-6" hoverEffect={false}>
+          <GlassCard className="border border-neutral-900 bg-neutral-950/60 p-6 flex flex-col sm:flex-row items-center justify-between gap-6" hoverEffect={false}>
             {/* Profile Switcher */}
-            <div className="flex flex-col items-center md:items-start gap-2 w-full md:w-auto">
+            <div className="flex flex-col items-center sm:items-start gap-2 w-full sm:w-auto">
               <span className="text-[10px] text-neutral-400 font-bold uppercase tracking-wider select-none">
                 Select Ambassador Profile
               </span>
-              <div className="flex flex-wrap justify-center md:justify-start gap-2">
+              <div className="flex flex-wrap justify-center sm:justify-start gap-2">
                 {profiles.map((p) => (
                   <button
                     key={p.id}
@@ -214,7 +214,7 @@ export default function Dashboard() {
             </div>
 
             {/* Registration Changer controls */}
-            <div className="flex flex-col items-center md:items-end gap-2 w-full md:w-auto">
+            <div className="flex flex-col items-center sm:items-end gap-2 w-full sm:w-auto">
               <span className="text-[10px] text-neutral-400 font-bold uppercase tracking-wider select-none">
                 Simulate Registrations
               </span>
