@@ -30,30 +30,32 @@ export const MilestoneNode: React.FC<MilestoneNodeProps> = ({
   return (
     <div
       className={cn(
-        "flex flex-col items-center gap-3 relative z-10 select-none transition-all duration-300",
+        "flex flex-col items-center gap-3 relative z-10 select-none transition-all duration-300 w-24 h-[148px] flex-shrink-0",
         isSelected && "scale-105",
         className
       )}
       {...props}
     >
       {/* Registrations Badge */}
-      <Badge
-        variant={isUnlocked ? "success" : isActive ? "primary" : "outline"}
-        glow={isActive || isUnlocked}
-        className={cn(
-          "font-mono text-[10px] tracking-tight",
-          isLocked && "text-neutral-500 border-neutral-800"
-        )}
-      >
-        {registrationsRequired} Scouts
-      </Badge>
+      <div className="h-5 flex items-center justify-center flex-shrink-0">
+        <Badge
+          variant={isUnlocked ? "success" : isActive ? "primary" : "outline"}
+          glow={isActive || isUnlocked}
+          className={cn(
+            "font-mono text-[10px] tracking-tight",
+            isLocked && "text-neutral-500 border-neutral-800"
+          )}
+        >
+          {registrationsRequired} Scouts
+        </Badge>
+      </div>
 
       {/* Interactive Reward Chest */}
       <button
         onClick={onNodeClick}
         aria-label={`Milestone: ${name}. Required registrations: ${registrationsRequired}. Status: ${status}`}
         className={cn(
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl flex-shrink-0 h-16 w-16",
           isSelected && "ring-2 ring-primary ring-offset-2 ring-offset-black"
         )}
       >
@@ -61,7 +63,7 @@ export const MilestoneNode: React.FC<MilestoneNodeProps> = ({
       </button>
 
       {/* Milestone Title */}
-      <div className="text-center">
+      <div className="text-center h-10 flex items-start justify-center overflow-hidden flex-shrink-0">
         <p
           className={cn(
             "text-xs font-bold leading-tight",

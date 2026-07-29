@@ -86,7 +86,7 @@ export const RewardJourney: React.FC<RewardJourneyProps> = ({
 
         {/* Milestone Horizontal Track (overflow scrollable on mobile) */}
         <div className="w-full overflow-x-auto py-8 px-4 scrollbar-thin scrollbar-thumb-neutral-800 scrollbar-track-transparent">
-          <div className="relative min-w-[700px] flex justify-between items-center py-4">
+          <div className="relative min-w-[700px] flex justify-between items-start py-4 h-[180px]">
             
             {/* Horizontal Line connector path */}
             <RewardPath progressPercentage={progressPercentage} />
