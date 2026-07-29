@@ -49,7 +49,7 @@ export default function Home() {
       {/* [A] INFINITE TICKER MARQUEE (Top Border) */}
       <div className="w-full bg-gradient-to-r from-[#F97316] to-[#EA580C] py-2.5 overflow-hidden border-b border-orange-500/20 relative z-25 select-none shadow-[0_4px_20px_rgba(249,115,22,0.15)]">
         <div className="marquee-container text-black font-extrabold text-[11px] sm:text-xs tracking-wider uppercase">
-          <div className="marquee-content flex gap-6" style={{ animationDuration: "18s" }}>
+          <div className="marquee-content flex gap-6" style={{ animationDuration: "14s" }}>
             {repeatedItems.map((item, idx) => (
               <span key={idx} className="flex items-center gap-6">
                 <span className={item.color}>{item.text}</span>
@@ -196,7 +196,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="w-full border-t border-neutral-950 py-8 px-8 text-center text-xs text-slate-600 mt-auto bg-[#030303]/90 relative z-20">
-        <p>&copy; {new Date().getFullYear()} EYFI Ambassador Network. Recreated with precision for UI/UX excellence.</p>
+        <p>&copy; 2026 NATARAJ EL. ALL RIGHTS RESERVED.</p>
       </footer>
     </div>
   );

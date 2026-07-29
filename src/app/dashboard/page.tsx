@@ -184,7 +184,7 @@ export default function Dashboard() {
             size="sm"
             onClick={toggleMute}
             leftIcon={isMuted ? <VolumeX size={12} /> : <Volume2 size={12} />}
-            className="h-8 border-neutral-850 text-xs px-2 sm:px-2.5 hover:bg-neutral-900 select-none"
+            className="h-8 border-neutral-850 text-xs px-2 sm:px-2.5 hover:bg-neutral-900 select-none rounded-full"
             aria-label={isMuted ? "Unmute sounds" : "Mute sounds"}
           >
             <span className="hidden xs:inline">{isMuted ? "Muted" : "Sound"}</span>
@@ -194,7 +194,7 @@ export default function Dashboard() {
             size="sm"
             onClick={handleResetSimulator}
             leftIcon={<RefreshCw size={12} />}
-            className="h-8 border-neutral-800 text-xs px-2.5 hover:bg-neutral-900 select-none"
+            className="h-8 border-neutral-850 text-xs px-2.5 hover:bg-neutral-900 select-none rounded-full"
           >
             Reset State
           </Button>
@@ -326,7 +326,7 @@ export default function Dashboard() {
 
       {/* Footer */}
       <footer className="w-full border-t border-neutral-950 py-6 text-center text-xs text-neutral-600 mt-auto bg-[#030303]/90 relative z-20">
-        &copy; {new Date().getFullYear()} EYFI Ambassador Program. Centralized Persistent Simulator.
+        &copy; 2026 NATARAJ EL. ALL RIGHTS RESERVED.
       </footer>
     </div>
   );

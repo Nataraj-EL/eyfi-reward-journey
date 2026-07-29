@@ -107,7 +107,7 @@ body {
 
 .marquee-content {
   display: inline-flex;
-  animation: marquee-scroll 35s linear infinite;
+  animation: marquee-scroll 28s linear infinite;
   min-width: 100%;
   justify-content: space-around;
   align-items: center;
