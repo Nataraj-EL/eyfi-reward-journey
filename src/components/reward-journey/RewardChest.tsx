@@ -28,10 +28,10 @@ export const RewardChest: React.FC<RewardChestProps> = ({
   };
 
   const containerStyles = cn(
-    "relative flex items-center justify-center rounded-xl border transition-all duration-300 select-none",
-    isLocked && "bg-neutral-900 border-neutral-800 text-neutral-600 opacity-60",
-    isActive && "bg-primary/10 border-primary shadow-[0_0_20px_rgba(163,230,53,0.2)] text-primary cursor-pointer",
-    isUnlocked && "bg-emerald-500/10 border-emerald-500 text-emerald-500 cursor-pointer",
+    "relative flex items-center justify-center rounded-xl border transition-all duration-300 select-none bg-[#050505]",
+    isLocked && "border-neutral-900 text-neutral-700",
+    isActive && "border-primary shadow-[0_0_20px_rgba(163,230,53,0.15)] text-primary cursor-pointer",
+    isUnlocked && "border-emerald-500 text-emerald-500 cursor-pointer",
     sizeClasses[size],
     className
   );

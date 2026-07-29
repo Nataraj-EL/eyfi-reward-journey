@@ -6,6 +6,8 @@ import { GlassCard } from "@/components/ui/GlassCard";
 import { Badge } from "@/components/ui/Badge";
 import { Trophy, School, Award } from "lucide-react";
 
+import { cn } from "@/utils/cn";
+
 export interface AmbassadorHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   name: string;
   university: string;
@@ -36,15 +38,20 @@ export const AmbassadorHeader: React.FC<AmbassadorHeaderProps> = ({
         
         {/* Profile Meta info */}
         <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
-          {/* Stylized Glassmorphic Avatar Circle */}
-          <div className="h-16 w-16 rounded-2xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center font-bold text-white text-xl shadow-lg border border-white/20 select-none relative overflow-hidden flex-shrink-0">
+          {/* Stylized Avatar container */}
+          <div className={cn(
+            "h-16 w-16 select-none relative flex-shrink-0 flex items-center justify-center",
+            avatarImageUrl 
+              ? "bg-transparent border-0" 
+              : "rounded-2xl bg-gradient-to-tr from-primary to-secondary font-bold text-white text-xl shadow-lg border border-white/20"
+          )}>
             {avatarImageUrl ? (
               <Image
                 src={`${avatarImageUrl}?v=2`}
                 alt={`${name} Avatar Mascot`}
                 fill
                 priority
-                className="object-contain p-1.5"
+                className="object-contain"
               />
             ) : (
               avatarPlaceholderText
