@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { MascotDisplay } from "@/components/ui/MascotDisplay";
 import { Badge } from "@/components/ui/Badge";
 import { CheckCircle, Award, Sparkles, RefreshCw } from "lucide-react";
@@ -26,6 +26,7 @@ export const RewardCardStack: React.FC<RewardCardStackProps> = ({
 }) => {
   const [isFlipped, setIsFlipped] = React.useState(false);
   const [isAnimating, setIsAnimating] = React.useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   const handleFlip = () => {
     if (isAnimating) return;
@@ -36,7 +37,7 @@ export const RewardCardStack: React.FC<RewardCardStackProps> = ({
   return (
     <div
       className={cn(
-        "w-[300px] h-[400px] [perspective:1200px] cursor-pointer select-none",
+        "w-[260px] xs:w-[300px] h-[360px] xs:h-[400px] [perspective:1200px] cursor-pointer select-none",
         className
       )}
       onClick={handleFlip}
@@ -44,19 +45,19 @@ export const RewardCardStack: React.FC<RewardCardStackProps> = ({
     >
       <motion.div
         className="w-full h-full relative [transform-style:preserve-3d]"
-        initial={{ rotateY: -35, scale: 0.8, opacity: 0 }}
+        initial={shouldReduceMotion ? { rotateY: 0, scale: 1, opacity: 1 } : { rotateY: -35, scale: 0.8, opacity: 0 }}
         animate={{ 
           rotateY: isFlipped ? 180 : 0,
           scale: 1,
           opacity: 1
         }}
-        whileHover={{
+        whileHover={shouldReduceMotion ? undefined : {
           rotateX: 6,
           rotateY: isFlipped ? 174 : 6,
           y: -10,
           boxShadow: "0 25px 50px rgba(163,230,53,0.22)"
         }}
-        transition={{ 
+        transition={shouldReduceMotion ? { duration: 0.1 } : { 
           type: "spring", 
           stiffness: 70, 
           damping: 14 
@@ -93,7 +94,7 @@ export const RewardCardStack: React.FC<RewardCardStackProps> = ({
               size="md"
               float
               glowColor="primary"
-              className="border-0 bg-transparent p-0 w-32 h-32"
+              className="border-0 bg-transparent p-0 w-24 h-24 xs:w-32 xs:h-32"
             />
           </div>
 

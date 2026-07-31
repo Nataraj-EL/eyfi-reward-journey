@@ -13,7 +13,7 @@ export interface MascotDisplayProps extends React.HTMLAttributes<HTMLDivElement>
   size?: "sm" | "md" | "lg" | "xl";
 }
 
-export const MascotDisplay: React.FC<MascotDisplayProps> = ({
+const MascotDisplayComponent: React.FC<MascotDisplayProps> = ({
   className,
   src,
   alt,
@@ -77,4 +77,5 @@ export const MascotDisplay: React.FC<MascotDisplayProps> = ({
   );
 };
 
+export const MascotDisplay = React.memo(MascotDisplayComponent);
 MascotDisplay.displayName = "MascotDisplay";

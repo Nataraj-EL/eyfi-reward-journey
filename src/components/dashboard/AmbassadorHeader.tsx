@@ -76,7 +76,7 @@ export const AmbassadorHeader: React.FC<AmbassadorHeaderProps> = ({
         </div>
 
         {/* Level Stats Summary */}
-        <div className="flex gap-4 sm:gap-6 items-center w-full sm:w-auto border-t border-neutral-900 pt-4 sm:pt-0 sm:border-0 justify-around sm:justify-end">
+        <div className="flex flex-wrap gap-x-4 gap-y-3 sm:gap-6 items-center w-full sm:w-auto border-t border-neutral-900 pt-4 sm:pt-0 sm:border-0 justify-between xs:justify-around sm:justify-end">
           
           <div className="flex flex-col items-center sm:items-end">
             <span className="text-[10px] text-neutral-500 uppercase tracking-wider font-semibold mb-1 flex items-center gap-1">
@@ -89,7 +89,7 @@ export const AmbassadorHeader: React.FC<AmbassadorHeaderProps> = ({
 
           <div className="flex flex-col items-center sm:items-end">
             <span className="text-[10px] text-neutral-500 uppercase tracking-wider font-semibold mb-1 flex items-center gap-1">
-              <Trophy size={11} className="text-accent" aria-hidden="true" /> Overall Rank
+              <Trophy size={11} className="text-accent" aria-hidden="true" /> Rank<span className="hidden xs:inline"> Overall</span>
             </span>
             <strong className="text-2xl font-black text-foreground">#{rank}</strong>
           </div>
@@ -98,7 +98,7 @@ export const AmbassadorHeader: React.FC<AmbassadorHeaderProps> = ({
 
           <div className="flex flex-col items-center sm:items-end">
             <span className="text-[10px] text-neutral-500 uppercase tracking-wider font-semibold mb-1 flex items-center gap-1">
-              <Award size={11} className="text-primary" aria-hidden="true" /> Accumulated Points
+              <Award size={11} className="text-primary" aria-hidden="true" /> Points<span className="hidden xs:inline"> Accumulated</span>
             </span>
             <strong className="text-2xl font-black text-primary font-mono">{totalPoints.toLocaleString()}</strong>
           </div>

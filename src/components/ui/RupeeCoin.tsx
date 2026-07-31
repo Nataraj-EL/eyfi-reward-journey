@@ -10,7 +10,7 @@ export interface RupeeCoinProps extends Omit<React.HTMLAttributes<HTMLDivElement
   speed?: number;
 }
 
-export const RupeeCoin: React.FC<RupeeCoinProps> = ({
+const RupeeCoinComponent: React.FC<RupeeCoinProps> = ({
   className,
   size = 80,
   rotation = 20,
@@ -110,4 +110,5 @@ export const RupeeCoin: React.FC<RupeeCoinProps> = ({
   );
 };
 
+export const RupeeCoin = React.memo(RupeeCoinComponent);
 RupeeCoin.displayName = "RupeeCoin";

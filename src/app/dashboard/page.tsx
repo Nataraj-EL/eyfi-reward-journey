@@ -205,11 +205,11 @@ export default function Dashboard() {
       </header>
 
       {/* Main Grid Wrapper */}
-      <main className="flex-grow max-w-7xl mx-auto px-6 py-10 w-full relative z-10 flex flex-col gap-8">
+      <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10 w-full relative z-10 flex flex-col gap-8">
         
         {/* PROFILE SELECTOR SECTION */}
         <section aria-label="Ambassador Profile Selector">
-          <GlassCard className="border border-neutral-900 bg-neutral-950/60 p-6" hoverEffect={false}>
+          <GlassCard className="border border-neutral-900 bg-neutral-950/60 p-5 sm:p-6" hoverEffect={false}>
             <div className="flex flex-col gap-2">
               <span className="text-[10px] text-neutral-400 font-bold uppercase tracking-wider select-none">
                 Select Ambassador Profile
@@ -219,7 +219,7 @@ export default function Dashboard() {
                   <button
                     key={p.id}
                     onClick={() => setActiveProfileId(p.id)}
-                    className={`px-4 py-2 rounded-xl text-xs font-extrabold border transition-all ${
+                    className={`px-4 py-2 rounded-xl text-xs font-extrabold border transition-all relative before:absolute before:-inset-y-1.5 before:inset-x-0 ${
                       activeProfileId === p.id
                         ? "bg-primary text-black border-primary shadow-[0_0_15px_rgba(163,230,53,0.3)]"
                         : "bg-neutral-900 border-neutral-850 text-neutral-450 hover:text-white hover:border-neutral-700"
@@ -268,7 +268,11 @@ export default function Dashboard() {
                   const isClaimed = claimedIds.includes(milestone.id);
 
                   return (
-                    <GlassCard key={milestone.id} className="flex gap-4 p-5 items-center border border-neutral-900 bg-neutral-950/40 relative overflow-hidden" hoverEffect>
+                    <GlassCard 
+                      key={milestone.id} 
+                      className="flex flex-col xs:flex-row gap-4 p-4 xs:p-5 items-center border border-neutral-900 bg-neutral-950/40 relative overflow-hidden text-center xs:text-left" 
+                      hoverEffect
+                    >
                       {/* Tiny Mascot visual icon */}
                       <div className="relative w-16 h-16 rounded-xl bg-neutral-900 flex items-center justify-center p-1 border border-neutral-850 flex-shrink-0">
                         <Image
@@ -280,18 +284,18 @@ export default function Dashboard() {
                         />
                       </div>
 
-                      <div className="flex-grow flex flex-col justify-between h-full py-0.5">
+                      <div className="flex-grow flex flex-col justify-between h-full py-0.5 w-full">
                         <div>
-                          <h4 className="text-sm font-bold text-foreground truncate">
+                          <h4 className="text-sm font-bold text-foreground truncate break-words max-w-full">
                             {milestone.name}
                           </h4>
-                          <span className="text-[10px] text-neutral-500 font-mono block mt-0.5 select-none">
+                          <span className="text-[10px] text-neutral-500 font-mono block mt-0.5 select-none truncate">
                             Unlocked at {milestone.registrationsRequired} Registrations
                           </span>
                         </div>
 
                         {/* Claim reward status button */}
-                        <div className="mt-3">
+                        <div className="mt-3 flex justify-center xs:justify-start">
                           {isClaimed ? (
                             <button
                               disabled
@@ -325,7 +329,7 @@ export default function Dashboard() {
       </main>
 
       {/* Footer */}
-      <footer className="w-full border-t border-neutral-950 py-6 text-center text-xs text-neutral-600 mt-auto bg-[#030303]/90 relative z-20">
+      <footer className="w-full border-t border-neutral-950 py-6 px-4 text-center text-xs text-neutral-600 mt-auto bg-[#030303]/90 relative z-20">
         &copy; 2026 NATARAJ EL. ALL RIGHTS RESERVED.
       </footer>
     </div>

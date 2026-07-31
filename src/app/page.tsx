@@ -22,28 +22,28 @@ export default function Home() {
       {/* BACKGROUND FLOATING COINS (6-8 coins distributed across the canvas to add 3D depth) */}
       <div className="absolute inset-0 pointer-events-none z-0">
         {/* Top Left Coin - Large, heavy blur */}
-        <RupeeCoin size={110} rotation={25} blurLevel="md" delay={0.2} speed={7.5} className="absolute top-[8%] left-[5%]" />
+        <RupeeCoin size={110} rotation={25} blurLevel="md" delay={0.2} speed={7.5} className="absolute top-[8%] left-[5%] hidden lg:block" />
         
         {/* Mid Left Coin - Small, sharp */}
-        <RupeeCoin size={60} rotation={-15} blurLevel="none" delay={1.4} speed={6.5} className="absolute top-[34%] left-[18%]" />
+        <RupeeCoin size={60} rotation={-15} blurLevel="none" delay={1.4} speed={6.5} className="absolute top-[34%] left-[4%] sm:left-[18%] md:left-[18%]" />
         
         {/* Bottom Left Coin - Medium, sharp */}
-        <RupeeCoin size={80} rotation={40} blurLevel="none" delay={2.1} speed={8} className="absolute bottom-[38%] left-[8%]" />
+        <RupeeCoin size={80} rotation={40} blurLevel="none" delay={2.1} speed={8} className="absolute bottom-[38%] left-[8%] hidden lg:block" />
         
         {/* Extreme Bottom Left - Small, heavy blur */}
-        <RupeeCoin size={75} rotation={-10} blurLevel="lg" delay={0.8} speed={7} className="absolute bottom-[10%] left-[13%]" />
+        <RupeeCoin size={75} rotation={-10} blurLevel="lg" delay={0.8} speed={7} className="absolute bottom-[10%] left-[13%] hidden lg:block" />
         
         {/* Top Right Coin - Large, sharp */}
-        <RupeeCoin size={135} rotation={-45} blurLevel="none" delay={0.5} speed={8} className="absolute top-[12%] right-[7%]" />
+        <RupeeCoin size={135} rotation={-45} blurLevel="none" delay={0.5} speed={8} className="absolute top-[12%] right-[7%] hidden lg:block" />
         
         {/* Mid Right Coin - Small, sharp */}
-        <RupeeCoin size={70} rotation={15} blurLevel="none" delay={1.8} speed={6} className="absolute top-[42%] right-[20%]" />
+        <RupeeCoin size={70} rotation={15} blurLevel="none" delay={1.8} speed={6} className="absolute top-[42%] right-[20%] hidden lg:block" />
         
         {/* Bottom Right Coin - Medium, blur */}
-        <RupeeCoin size={85} rotation={-30} blurLevel="sm" delay={1.1} speed={7.2} className="absolute bottom-[35%] right-[9%]" />
+        <RupeeCoin size={85} rotation={-30} blurLevel="sm" delay={1.1} speed={7.2} className="absolute bottom-[35%] right-[4%] sm:right-[9%] md:right-[9%]" />
         
         {/* Extreme Bottom Right - Large, heavy blur */}
-        <RupeeCoin size={105} rotation={20} blurLevel="lg" delay={2.7} speed={9} className="absolute bottom-[4%] right-[14%]" />
+        <RupeeCoin size={105} rotation={20} blurLevel="lg" delay={2.7} speed={9} className="absolute bottom-[4%] right-[14%] hidden lg:block" />
       </div>
 
       {/* [A] INFINITE TICKER MARQUEE (Top Border) */}
@@ -61,7 +61,7 @@ export default function Home() {
       </div>
 
       {/* [B] NAVIGATION BAR */}
-      <header className="w-full max-w-7xl mx-auto px-6 sm:px-8 pt-2 pb-4 flex justify-between items-center relative z-20 bg-transparent">
+      <header className="w-full max-w-7xl mx-auto px-4 sm:px-8 pt-2 pb-4 flex justify-between items-center relative z-20 bg-transparent">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg">
           <Image
@@ -70,6 +70,7 @@ export default function Home() {
             width={100}
             height={32}
             priority
+            sizes="100px"
             className="object-contain"
           />
         </Link>
@@ -118,16 +119,17 @@ export default function Home() {
             width={120}
             height={120}
             priority
-            className="relative z-10 drop-shadow-[0_4px_10px_rgba(163,230,53,0.25)] animate-float"
+            sizes="(max-width: 640px) 80px, 120px"
+            className="relative z-10 drop-shadow-[0_4px_10px_rgba(163,230,53,0.25)] animate-float object-contain w-20 h-20 sm:w-28 sm:h-28 md:w-[120px] md:h-[120px]"
           />
         </div>
 
         {/* Headlines */}
         <div className="space-y-3 select-none font-sharp-display">
-          <span className="block text-2xl sm:text-3xl font-extrabold tracking-[-0.04em] text-white opacity-95">
+          <span className="block text-xl sm:text-3xl font-extrabold tracking-[-0.04em] text-white opacity-95">
             Someone is going to
           </span>
-          <h2 className="text-6xl sm:text-8xl font-black tracking-[-0.04em] leading-[0.95]">
+          <h2 className="text-4xl xs:text-5xl sm:text-7xl lg:text-8xl font-black tracking-[-0.04em] leading-[0.95]">
             build{" "}
             <span
               className="text-primary inline-block px-3"
@@ -136,7 +138,7 @@ export default function Home() {
               EYFI
             </span>
           </h2>
-          <h2 className="text-5xl sm:text-7xl font-black tracking-[-0.04em] leading-[0.95] mt-1">
+          <h2 className="text-3xl xs:text-4xl sm:text-6xl lg:text-7xl font-black tracking-[-0.04em] leading-[0.95] mt-1">
             on your <span className="text-primary">campus.</span>
           </h2>
           

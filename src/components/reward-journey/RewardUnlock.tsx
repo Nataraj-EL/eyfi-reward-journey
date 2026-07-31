@@ -72,7 +72,7 @@ export const RewardUnlock: React.FC<RewardUnlockProps> = ({
 
         {/* Modal Window Container */}
         <motion.div
-          className="relative z-10 max-w-lg w-full glass-panel border border-neutral-900 bg-neutral-950/80 rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-center min-h-[460px] overflow-hidden"
+          className="relative z-10 max-w-lg w-full glass-panel border border-neutral-900 bg-neutral-950/80 rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-center min-h-[460px] sm:min-h-[480px] max-h-[92vh] overflow-y-auto scrollbar-thin scrollbar-thumb-neutral-800 scrollbar-track-transparent"
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}

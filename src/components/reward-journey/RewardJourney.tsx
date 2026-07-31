@@ -85,7 +85,7 @@ export const RewardJourney: React.FC<RewardJourneyProps> = ({
         </div>
 
         {/* Milestone Horizontal Track (overflow scrollable on mobile) */}
-        <div className="w-full overflow-x-auto py-8 px-4 scrollbar-thin scrollbar-thumb-neutral-800 scrollbar-track-transparent">
+        <div className="w-full overflow-x-auto py-8 px-4 scrollbar-thin scrollbar-thumb-neutral-800 scrollbar-track-transparent touch-pan-x snap-x snap-mandatory select-none">
           <div className="relative min-w-[700px] flex justify-between items-start py-4 h-[180px]">
             
             {/* Horizontal Line connector path */}
@@ -113,7 +113,7 @@ export const RewardJourney: React.FC<RewardJourneyProps> = ({
                       setIsUnlockOpen(true);
                     }
                   }}
-                  className="w-24 flex-shrink-0"
+                  className="w-24 flex-shrink-0 snap-center"
                 />
               );
             })}
